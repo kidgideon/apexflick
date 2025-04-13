@@ -1,0 +1,217 @@
+.overlay {
+   height: 100vh;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   padding: 0px;
+   margin: 0px;
+}
+
+.logoArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoArea img {
+    width: 80px;
+    height: 80px;
+    border-radius: 80px;
+    margin: 30px;
+}
+
+.formArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.formArea button {
+    width: 100%;
+    max-width: 340px;
+    padding: 15px 0px;
+    background-color: rgb(33,59,44);
+    color: white;
+    border-radius: 5px;
+    border: none; 
+}
+
+.loginForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loginForm div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.loginForm div svg {
+     width: 30px;
+}
+
+.loginForm input {
+    outline: none;
+}
+
+.continueArea img{
+  width: 50px;
+}
+
+.inputContainer {
+    
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    background-color:rgb(33,59,44);
+    border-radius: 6px;
+    padding: 1px 1px;
+  }
+  
+  .passwordContainer {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    background-color: rgb(33,59,44);
+    border-radius: 6px;
+    padding: 1px 1px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 12px 0px 12px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    color: white;
+    margin-left: 7px;
+  }
+  
+  .leftIcon {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #999;
+  }
+  
+  .rightIcon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .continueArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .googleContinue {
+    width: 340px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(243, 243, 243);
+    
+  }
+  
+  .continueArea img {
+    width: 35px;
+    border-radius: 5px;
+  }
+
+  .continuePrompt {
+    width: 340px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .continuePrompt hr {
+    width: 30%;
+  }
+
+  .continuePrompt p {
+    font-size: 95%;
+  }
+
+  .linkText {
+    color: rgb(33,59,44);
+    text-decoration: none;
+    
+  }
+
+  .linkText:visited {
+    color: rgb(33,59,44);
+    text-decoration: none;
+  }
+  
+
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  
+  .modal {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 200px;
+  }
+  
+  .modal button {
+    margin-top: 20px;
+    padding: 8px 20px;
+    background-color: rgb(33,59,44);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 50%;
+  }
+  

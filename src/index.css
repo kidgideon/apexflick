@@ -2,4 +2,9 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+* {
+    font-family: 'Rajdhani', sans-serif;
 }

@@ -33,6 +33,7 @@ const Register = () => {
         <div className={styles.overlay}>
             <div className={styles.logoArea}>
                 <img src={Logo} alt="Logo" />
+                <h3>Create an account</h3>
             </div>
 
             <div className={styles.formArea}>

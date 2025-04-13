@@ -1,8 +1,13 @@
 import { useState } from 'react';
-import { auth, db } from '../config/config'; // adjust if your config path differs
+import { auth, db } from '../config/config';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { collection, doc, getDocs, query, where, setDoc } from 'firebase/firestore';
 
+// Utility to normalize and validate usernames
+const normalizeUsername = (name) => name.toLowerCase().replace(/[^a-z0-9_]/g, '');
+const generateRandomSuffix = () => Math.random().toString(36).substring(2, 6);
+
+// Core hook
 const useRegister = () => {
   const [modal, setModal] = useState({ visible: false, message: '' });
 
@@ -11,21 +16,23 @@ const useRegister = () => {
 
   const isUsernameValid = (username) => /^[a-zA-Z0-9_]+$/.test(username);
 
-  // Function to check if the username already exists
   const isUsernameTaken = async (username) => {
-    const q = query(collection(db, 'users'), where('username', '==', username));
+    const normalized = username.toLowerCase();
+    const q = query(collection(db, 'users'), where('username', '==', normalized));
     const existingUsers = await getDocs(q);
     return !existingUsers.empty;
   };
 
   const registerUser = async (username, email, password) => {
     try {
-      if (!isUsernameValid(username)) {
+      const normalizedUsername = normalizeUsername(username);
+
+      if (!isUsernameValid(normalizedUsername)) {
         showModal('Username must not contain spaces or special characters.');
         return;
       }
 
-      if (await isUsernameTaken(username)) {
+      if (await isUsernameTaken(normalizedUsername)) {
         showModal('Username is already taken. Please choose another one.');
         return;
       }
@@ -42,21 +49,20 @@ const useRegister = () => {
         return;
       }
 
-      // Use RoboHash for avatar
-      const avatarUrl = `https://robohash.org/${username}?set=set2&size=200x200`;
+      const avatarUrl = `https://robohash.org/${normalizedUsername}?set=set2&size=200x200`;
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
       await setDoc(doc(db, 'users', uid), {
-        username,
+        username: normalizedUsername,
         email,
         profilePicture: avatarUrl,
         wins: [],
         gameplay: {
           roundsPlayed: 0,
           apexCard: 0,
-          lastPlayed: null
+          lastPlayed: null,
         },
         friends: [],
         invitedMe: null,
@@ -68,8 +74,8 @@ const useRegister = () => {
           pendingAmount: 0,
           history: [],
           accountNumber: '',
-          bank: ''
-        }
+          bank: '',
+        },
       });
 
       showModal('Registration successful!');
@@ -79,15 +85,22 @@ const useRegister = () => {
     }
   };
 
-  // Google Authentication Method
   const googleSignUp = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      
-      // Check if the user already exists in Firestore
-      const q = query(collection(db, 'users'), where('email', '==', user.email));
+
+      const email = user.email;
+      const displayName = user.displayName || email.split('@')[0];
+      let baseUsername = normalizeUsername(displayName);
+      let username = `${baseUsername}_${generateRandomSuffix()}`;
+
+      while (await isUsernameTaken(username)) {
+        username = `${baseUsername}_${generateRandomSuffix()}`;
+      }
+
+      const q = query(collection(db, 'users'), where('email', '==', email));
       const existingUsers = await getDocs(q);
 
       if (!existingUsers.empty) {
@@ -95,24 +108,17 @@ const useRegister = () => {
         return;
       }
 
-      if (await isUsernameTaken(user.displayName)) {
-        showModal('Username is already taken. Please choose another one.');
-        return;
-      }
-
-
-      // Create a profile document if new user
-      const avatarUrl = `https://robohash.org/${user.displayName}?set=set2&size=200x200`;
+      const avatarUrl = `https://robohash.org/${username}?set=set2&size=200x200`;
 
       await setDoc(doc(db, 'users', user.uid), {
-        username: user.displayName,
-        email: user.email,
+        username,
+        email,
         profilePicture: avatarUrl,
         wins: [],
         gameplay: {
           roundsPlayed: 0,
           apexCard: 0,
-          lastPlayed: null
+          lastPlayed: null,
         },
         friends: [],
         invitedMe: null,
@@ -124,8 +130,8 @@ const useRegister = () => {
           pendingAmount: 0,
           history: [],
           accountNumber: '',
-          bank: ''
-        }
+          bank: '',
+        },
       });
 
       showModal('Registration successful!');

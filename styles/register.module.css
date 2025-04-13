@@ -14,13 +14,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    margin: 30px;
+}
+
+.logoArea h3 {
+ font-style: italic;
 }
 
 .logoArea img {
     width: 80px;
     height: 80px;
     border-radius: 80px;
-    margin: 30px;
+   
 }
 
 .formArea {
@@ -161,6 +167,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    margin: 10px;
   }
 
   .continuePrompt hr {
@@ -215,3 +222,11 @@
     width: 50%;
   }
   
+  .superP {
+    width: 100%;
+    max-width: 340px;
+    text-align: end;
+    margin: 3px;
+    margin-bottom: 20px;
+    font-size: 90%;
+  }

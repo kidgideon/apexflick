@@ -1,0 +1,99 @@
+.gameplayArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navBar {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+   margin-top: 10px;
+}
+
+.profilePic img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.navBar svg{
+ width: 30px;
+}
+
+.card img{
+    width: 45px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.theCard  img{
+    width: 70px;
+    height: 75px;
+    border-radius: 5px;
+}
+
+.gameCount {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 100px;
+    margin-top: 30px;
+}
+
+.apexCount {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    height: 100%;
+}
+
+.apexRounds {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cardsPlayArea {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+
+input {
+    width: 20px;
+}
+
+/* Add glow effect for the Apex card */
+.theCard.glow {
+    box-shadow: 0 0 15px 5px rgb(33,59,44); /* Glowing yellow effect */
+    border-radius: 5px; /* Match the existing card border-radius */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the glow */
+}
+
+/* Shake animation for wrong card */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+}
+
+.theCard.shake {
+    animation: shake 0.5s ease-in-out; /* Apply shake animation */
+}

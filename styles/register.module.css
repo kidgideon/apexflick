@@ -226,3 +226,14 @@
     margin-bottom: 20px;
     font-size: 90%;
   }
+
+  .mrapexdiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mrapexdiv img {
+    width: 150px;
+  }

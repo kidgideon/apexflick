@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import styles from  '../../../styles/register.module.css';
 import { Link } from 'react-router-dom';
-import Logo from '../../../public/apexflick logo.jpg';
-import googleicon from '../../../public/google icon.png';
+import Logo from '../../../images/apexflick logo.jpg';
+import googleicon from '../../../images/google icon.png';
 import useLogin from '../../../hooks/login';
 import { motion } from 'framer-motion';
+import mrApex from '../../../images/mrapex.png'
 
  const Login = () => {
       const [email, setEmail] = useState('');
@@ -139,6 +140,9 @@ import { motion } from 'framer-motion';
                             exit={{ scale: 1.0 }}     // Scale down on exit
                             transition={{ duration: 0.3 }}  // Animation duration
                         >
+                             <div className={styles.mrapexdiv}>
+                                <img src={mrApex} alt="" />
+                             </div>
                             <p>{modal.message}</p>
                             <button onClick={closeModal}>OK</button>
                         </motion.div>

@@ -20,6 +20,8 @@ const useGameplay = () => {
   const [phase, setPhase] = useState(saved.phase || 'idle');
   const [selectedCardId, setSelectedCardId] = useState(saved.selectedCardId || null);
 
+  let comboCount = 0; // Use a `let` variable for combo count
+
   // Save game state to localStorage on any change
   useEffect(() => {
     const gameState = {
@@ -35,7 +37,8 @@ const useGameplay = () => {
 
   // Generate new cards with 1 Apex
   const generateCards = () => {
-    const apexIndex = Math.floor(Math.random() * 5);
+    const apexIndex = Math.floor(Math.random() * 5); // Randomly select the Apex card index
+    console.log(`Apex card is at position: ${apexIndex}`); // Log the position of the Apex card
     return Array.from({ length: 5 }, (_, i) => ({
       id: i,
       isApex: i === apexIndex,
@@ -49,6 +52,7 @@ const useGameplay = () => {
     setSelectedCardId(null);
     setLastPlayed(Date.now());
     setRoundsPlayed((prev) => prev + 1);
+    comboCount = 0; // Reset combo count on new game
   };
 
   // Handle selection
@@ -57,9 +61,24 @@ const useGameplay = () => {
 
     setSelectedCardId(cardId);
     const picked = cards.find((c) => c.id === cardId);
+
     if (picked?.isApex) {
-      setApexCard((prev) => prev + 1);
+      setApexCard((prev) => prev + 1); // Increment Apex card count
+
+      // Increment combo count manually
+      comboCount += 1;
+      console.log(`Combo Count: ${comboCount}`); // Debugging combo count
+
+      if (comboCount === 2) {
+        console.log('Combo triggered! Adding an extra Apex card.');
+        setApexCard((prev) => prev + 1); // Add an extra Apex card
+        comboCount = 0; // Reset combo count after triggering
+      }
+    } else {
+      console.log('Incorrect card selected. Resetting combo count.');
+      comboCount = 0; // Reset combo count on incorrect guess
     }
+
     setPhase('result'); // Transition to 'result' phase
   };
 
@@ -70,6 +89,7 @@ const useGameplay = () => {
     setLastPlayed(null);
     setPhase('idle'); // Transition to 'idle' phase
     setSelectedCardId(null);
+    comboCount = 0; // Reset combo count
     localStorage.removeItem('gameState');
   };
 

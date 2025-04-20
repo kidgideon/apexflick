@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../../config/config';
@@ -37,6 +37,7 @@ const GamePlay = () => {
     apexCard,
     phase,
     selectedCardId,
+    comboCount,
     startGame,
     selectCard,
   } = useGameplay();
@@ -45,6 +46,9 @@ const GamePlay = () => {
   const [profilePicUrl, setProfilePicUrl] = useState(null);
   const [shakeCardId, setShakeCardId] = useState(null); // Track the card to shake
   const [glowCardId, setGlowCardId] = useState(null); // Track the card to glow
+  const [showCombo, setShowCombo] = useState(false); // Track combo text visibility
+  const [glow, setGlow] = useState(false); // Track if the Apex card count should glow
+  const apexCardRef = useRef(null); // Reference to the Apex card count
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -74,14 +78,25 @@ const GamePlay = () => {
     flipSoundEffect.play(); // Play flip sound when the game starts
     setShakeCardId(null); // Reset shake state
     setGlowCardId(null); // Reset glow state
+    setShowCombo(false); // Reset combo text
     startGame();
   };
 
   const handleSelectCard = (cardId) => {
     const selectedCard = cards.find((card) => card.id === cardId);
     if (selectedCard?.isApex) {
+      // Trigger the glow effect
+      setGlow(true);
+      setTimeout(() => setGlow(false), 1000); // Remove glow after 1 second
+
       successSoundEffect.play(); // Play success sound for correct card
       setGlowCardId(cardId); // Glow the correct card
+
+      // Show combo text if comboCount reaches 2
+      if (comboCount + 1 === 2) {
+        setShowCombo(true); // Show combo animation
+        setTimeout(() => setShowCombo(false), 2000); // Hide combo text after 2 seconds
+      }
     } else {
       failSoundEffect.play(); // Play fail sound for wrong card
       setShakeCardId(cardId); // Shake the wrong card
@@ -132,8 +147,11 @@ const GamePlay = () => {
 
       {/* === SCORE AREA === */}
       <div className={styles.gameCount}>
-        <div className={styles.apexCount}>
-          <div className={styles.card}>
+        <div
+          className={styles.apexCount} // Add glow class dynamically
+          ref={apexCardRef} // Reference to the Apex card count
+        >
+          <div className={`${styles.card} ${glow ? styles.glow : ''}`} >
             <img src={apexCardImg} alt="Apex card" />
           </div>
           <span className={styles.count}>{apexCard}</span>
@@ -146,53 +164,82 @@ const GamePlay = () => {
             <span>1000</span>
           </div>
           <div className={styles.cardsBar}>
-            <progress value={roundsPlayed} max={1000}></progress>
+            <progress className={styles.progressBar} value={roundsPlayed} max={1000}></progress>
           </div>
         </div>
       </div>
 
+      {/* === COMBO TEXT === */}
+      {showCombo && <div className={styles.comboText}>+1 Combo!</div>}
+
       {/* === CARD DISPLAY === */}
       <div className={styles.cardsPlayArea}>
-        {cards.map((card, index) => (
-          <div
-            className={`${styles.theCard} ${
-              glowCardId === card.id ? styles.glow : ''
-            } ${shakeCardId === card.id ? styles.shake : ''}`} // Add shake class dynamically
-            key={card.id}
-            onClick={() => {
-              if (phase === 'play') {
-                handleSelectCard(card.id); // Handle card selection with sound
-              }
-            }}
-          >
-            <img
-              src={getCardImage(card)}
-              alt="card"
-            />
-          </div>
-        ))}
+        <div className={styles.cardsPlacement}>
+          {cards.map((card, index) => (
+            <motion.div
+              id={`card-${card.id}`} // Add an ID to track the card
+              className={`${styles.theCard} ${
+                glowCardId === card.id ? styles.glow : ''
+              } ${shakeCardId === card.id ? styles.shake : ''}`}
+              key={card.id}
+              initial={{ scale: 0, opacity: 0, y: -50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 20,
+                delay: index * 0.1,
+              }}
+              onClick={() => {
+                if (phase === 'play') {
+                  handleSelectCard(card.id);
+                }
+              }}
+            >
+              <img src={getCardImage(card)} alt="card" />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className={styles.buttons}>
+          {/* === PLAY & NEXT BUTTON === */}
+          {phase === 'idle' && (
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }} // Start small and invisible
+              animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
+              transition={{
+                type: 'spring', // Use spring animation for bounce effect
+                stiffness: 400, // Faster bounce intensity
+                damping: 15, // Smooth bounce
+                duration: 0.3, // Faster animation duration
+              }}
+              whileTap={{ scale: 0.95 }} // Slightly shrink on tap
+              onClick={handleStartGame} // Play sound and start game
+              className={styles.playBtn}
+            >
+              Play
+            </motion.button>
+          )}
+
+          {phase === 'result' && (
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }} // Start small and invisible
+              animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
+              transition={{
+                type: 'spring', // Use spring animation for bounce effect
+                stiffness: 400, // Faster bounce intensity
+                damping: 15, // Smooth bounce
+                duration: 0.3, // Faster animation duration
+              }}
+              whileTap={{ scale: 0.95 }} // Slightly shrink on tap
+              onClick={handleStartGame} // Play sound and start next round
+              className={styles.playBtn}
+            >
+              Next
+            </motion.button>
+          )}
+        </div>
       </div>
-
-      {/* === PLAY & NEXT BUTTON === */}
-      {phase === 'idle' && (
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          onClick={handleStartGame} // Play sound and start game
-          className={styles.playBtn}
-        >
-          Play
-        </motion.button>
-      )}
-
-      {phase === 'result' && (
-        <motion.button
-          whileTap={{ scale: 0.95 }}
-          onClick={handleStartGame} // Play sound and start next round
-          className={styles.playBtn}
-        >
-          Next
-        </motion.button>
-      )}
     </div>
   );
 };

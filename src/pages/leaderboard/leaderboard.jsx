@@ -11,8 +11,7 @@ const Leaderboard = () => {
   const leadUser = qualifiedUsers[0];
   const secondUser = qualifiedUsers[1];
   const thirdUser = qualifiedUsers[2];
-  const otherQualified = qualifiedUsers.slice(3); // Rest for the main leaderboard
-
+ 
   const goBack = () => {
      navigate(-1);
   }
@@ -80,7 +79,7 @@ const Leaderboard = () => {
           <h1>₦10,000</h1>
 
           <div className={styles.competitors}>
-            {otherQualified.map((user, index) => (
+            {qualifiedUsers.map((user, index) => (
               <div className={styles.competitor} key={user.id}>
                 <div className={styles.userDp}>
                   <img src={user.profilePicture} alt="dp" />

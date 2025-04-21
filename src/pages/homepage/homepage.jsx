@@ -1,14 +1,18 @@
 import styles from './../../../styles/home.module.css';
 import { Link } from 'react-router-dom';
+import { getAuth } from 'firebase/auth'; // Import Firebase Auth
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Logo from '../../../images/apexflick logo.jpg';
 import cardFront from '../../../images/apexcard.png';
 import cardBack from '../../../images/cardsback.png';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import {auth, db} from '../../../config/config'
 
 const HomePage = () => {
   const [animationType, setAnimationType] = useState('flip'); // Track the current animation type
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track the state of the menu
+  const navigate = useNavigate(); // Initialize navigation
 
   // Automatically switch between flip and bounce animations
   useEffect(() => {
@@ -23,6 +27,15 @@ const HomePage = () => {
   const handleOutsideClick = (e) => {
     if (e.target.classList.contains(styles.menuOverlay)) {
       setIsMenuOpen(false);
+    }
+  };
+
+  const handleStartPlaying = () => {
+    const user = auth.currentUser; // Check if there's a current user
+    if (user) {
+      navigate('/gameplay'); // Navigate to gameplay if user is logged in
+    } else {
+      navigate('/register'); // Navigate to register if no user is logged in
     }
   };
 
@@ -52,10 +65,10 @@ const HomePage = () => {
 
         {/* Links for larger screens */}
         <div className={styles.links}>
-          <Link className={styles.moveEl}>Home</Link>
-          <Link className={styles.moveEl}>how it works</Link>
-          <Link className={styles.moveEl}>contact</Link>
-          <Link className={styles.moveEl}>login/signup</Link>
+          <Link to={'/'} className={styles.moveEl}>Home</Link>
+          <Link to={'/'} className={styles.moveEl}>how it works</Link>
+          <Link to={'/'} className={styles.moveEl}>contact</Link>
+          <Link to={'/login'} className={styles.moveEl}>login/signup</Link>
         </div>
       </div>
 
@@ -94,7 +107,7 @@ const HomePage = () => {
           <h1>Play. pick. Win.</h1>
           <h1>No Deposits</h1>
           <h4>Nigerians most thrilling card-pick cash game</h4>
-          <button>Start playing Now</button>
+          <button onClick={handleStartPlaying}>Start playing Now</button>
         </div>
         <div className={styles.cardArea}>
           <motion.div

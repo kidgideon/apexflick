@@ -150,7 +150,7 @@ const GamePlay = () => {
         <div
           className={styles.apexCount} // Add glow class dynamically
           ref={apexCardRef} // Reference to the Apex card count
-        >
+        > 
           <div className={`${styles.card} ${glow ? styles.glow : ''}`} >
             <img src={apexCardImg} alt="Apex card" />
           </div>

@@ -1,0 +1,308 @@
+.homepage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgb(10, 31, 22);
+}
+
+/* Navbar */
+.navbar {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    position: relative;
+}
+
+/* Hamburger Icon (hidden on larger screens) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+/* Links (hidden on smaller screens) */
+.links {
+    display: flex;
+    gap: 20px;
+}
+
+.links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Menu Overlay */
+.menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Sliding Menu Panel */
+.menuPanel {
+    width: 250px;
+    height: 100%;
+    background-color: rgb(10, 31, 22);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.menuPanel a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 40%;
+    color: white;
+    gap: 5px;
+}
+
+.logo img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.moveEl {
+    color: white;
+    text-decoration: none;
+}
+
+.topArea {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    color: white;
+    margin-top: 40px;
+}
+
+.topArea button {
+    background-color: rgb(25, 195, 125);
+    color: white;
+    padding: 20px 50px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 100%;
+}
+
+.cashSection {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 10%;
+}
+
+.cashSection h1 {
+    font-size: 300%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Card Area */
+.cardArea {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px; /* Increase perspective for a stronger 3D effect */
+}
+
+/* Card Container */
+.cardContainer {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d; /* Preserve 3D effect */
+    transition: transform 0.6s ease-in-out; /* Smooth rotation */
+}
+
+/* Card */
+/* Card */
+.card {
+    width: 300px;
+    height: 400px;
+    position: relative;
+    transform-style: preserve-3d; /* Enable 3D effect */
+    transition: none; /* Remove conflicting CSS transitions */
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.6); /* Continuous green glow */
+  }
+
+/* Card Front */
+.cardFront,
+.cardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide the back when front is visible */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden;
+}
+
+/* Card Front */
+.cardFront {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Card Back */
+.cardBack {
+    background-color: transparent;
+    transform: rotateY(180deg); /* Rotate back face */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flipped State */
+.flipped {
+    transform: rotateY(180deg); /* Rotate the card */
+}
+
+/* Glow Effect */
+.cardContainer:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.6); /* Green glow on hover */
+}
+
+.card {
+    box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.6); /* Continuous green glow */
+}
+
+/* Shadow for Realism */
+.card::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    filter: blur(10px);
+    z-index: -1; /* Place behind the card */
+    transform: rotateX(10deg) rotateY(10deg); /* Slight shadow slant */
+}
+
+.howItworks {
+    margin-top: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.detailExplanation {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.detailExplanation svg {
+    background-color: rgb(2, 56, 42);
+    color: #19c37d;
+    width: 50px;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+}
+
+.detailExplanation {
+    color: white;
+    font-weight: bold;
+}
+
+.detailExplanation div {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 5px;
+    font-size: 80%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .topArea {
+        flex-direction: column;
+    }
+
+    .cashSection {
+        width: 100%;
+        padding-left: 0%;
+        padding-top: 10%;
+        align-items: center;
+    }
+
+    .cardArea {
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .detailExplanation {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+        column-gap: 20px;
+        row-gap: 20px;
+    }
+
+    .detailExplanation div {
+        width: 80%;
+        height: 80%;
+        font-size: 70%;
+        border-radius: 0px;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        padding: 10px;
+    }
+
+    .links {
+        display: none; /* Hide links on smaller screens */
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger icon on smaller screens */
+    }
+}

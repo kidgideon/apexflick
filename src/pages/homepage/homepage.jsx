@@ -6,13 +6,14 @@ import Logo from '../../../images/apexflick logo.jpg';
 import cardFront from '../../../images/apexcard.png';
 import cardBack from '../../../images/cardsback.png';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {auth, db} from '../../../config/config'
 
 const HomePage = () => {
   const [animationType, setAnimationType] = useState('flip'); // Track the current animation type
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Track the state of the menu
   const navigate = useNavigate(); // Initialize navigation
+   const menuRef = useRef();
 
   // Automatically switch between flip and bounce animations
   useEffect(() => {
@@ -23,12 +24,17 @@ const HomePage = () => {
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
 
-  // Close the menu when clicking outside
+  
+useEffect(() => {
   const handleOutsideClick = (e) => {
-    if (e.target.classList.contains(styles.menuOverlay)) {
+    if (menuRef.current && !menuRef.current.contains(e.target)) {
       setIsMenuOpen(false);
     }
   };
+  document.addEventListener('mousedown', handleOutsideClick);
+  return () => document.removeEventListener('mousedown', handleOutsideClick);
+}, []);
+
 
   const handleStartPlaying = () => {
     const user = auth.currentUser; // Check if there's a current user
@@ -72,31 +78,67 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Sliding Menu Panel */}
-      {isMenuOpen && (
-        <div
-          className={styles.menuOverlay}
-          onClick={handleOutsideClick} // Close menu on outside click
-        >
+    
+        {isMenuOpen && (
+        <div className={styles.menuModalOverlay}>
           <motion.div
-            className={styles.menuPanel}
+            className={styles.menuModal}
+            ref={menuRef}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3 }}
+            transition={{ type: 'spring', stiffness: 100 }}
           >
-            <Link className={styles.moveEl} onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-            <Link className={styles.moveEl} onClick={() => setIsMenuOpen(false)}>
-              how it works
-            </Link>
-            <Link className={styles.moveEl} onClick={() => setIsMenuOpen(false)}>
-              contact
-            </Link>
-            <Link className={styles.moveEl} onClick={() => setIsMenuOpen(false)}>
-              login/signup
-            </Link>
+            {['Home', 'How it works', 'contact ', 'Login', 'signup'].map((label, index) => (
+              <motion.div
+                key={label}
+                className={styles.menuItem}
+                initial={{ x: 100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: index * 0.1, type: 'tween' }}
+              >
+                {/* Match icons to their order manually */}
+                {index === 0 && (
+                  // Withdrawal Icon
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                
+                )}
+                {index === 1 && (
+                  // Task Icon
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+                </svg>
+                
+                
+                )}
+                {index === 2 && (
+                  // Help & Support Icon
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                </svg>
+                
+                
+                )}
+                {index === 3 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 1 1 9 0v3.75M3.75 21.75h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H3.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                  </svg>
+                  
+                        
+               
+                )}
+                {
+                  index === 4 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                  </svg>     
+                  )
+                }
+                <span>{label}</span>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       )}

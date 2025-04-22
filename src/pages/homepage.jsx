@@ -23,7 +23,6 @@ const HomePage = () => {
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
 
-  
 useEffect(() => {
   const handleOutsideClick = (e) => {
     if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -34,7 +33,6 @@ useEffect(() => {
   return () => document.removeEventListener('mousedown', handleOutsideClick);
 }, []);
 
-
   const handleStartPlaying = () => {
     const user = auth.currentUser; // Check if there's a current user
     if (user) {
@@ -43,6 +41,20 @@ useEffect(() => {
       navigate('/register'); // Navigate to register if no user is logged in
     }
   };
+
+  const tosomewhere = (place) => {
+         if (place === "Home") {
+          navigate('/')
+         } else if (place === "How it works") {
+          navigate('/about')
+         } else if (place === "contact") {
+          navigate('/mailto:apexflick.com@gmail.com')
+         } else if (place === "Login") {
+          navigate('/login')
+         } else if (place === "signup") {
+          navigate('/register')
+         }
+  }
 
   return (
     <div className={styles.homepage}>
@@ -71,16 +83,16 @@ useEffect(() => {
         {/* Links for larger screens */}
         <div className={styles.links}>
           <Link to={'/'} className={styles.moveEl}>Home</Link>
-          <Link to={'/'} className={styles.moveEl}>how it works</Link>
-          <Link to={'/'} className={styles.moveEl}>contact</Link>
+          <Link to={'/about'} className={styles.moveEl}>how it works</Link>
+          <Link to={'/mailto:apexflick.com@gmail.com'} className={styles.moveEl}>contact</Link>
           <Link to={'/login'} className={styles.moveEl}>login/signup</Link>
         </div>
       </div>
 
-    
         {isMenuOpen && (
         <div className={styles.menuModalOverlay}>
           <motion.div
+           
             className={styles.menuModal}
             ref={menuRef}
             initial={{ x: '100%' }}
@@ -90,6 +102,7 @@ useEffect(() => {
           >
             {['Home', 'How it works', 'contact ', 'Login', 'signup'].map((label, index) => (
               <motion.div
+              onClick={() => tosomewhere(label)}
                 key={label}
                 className={styles.menuItem}
                 initial={{ x: 100, opacity: 0 }}
@@ -109,7 +122,6 @@ useEffect(() => {
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
                 </svg>
-                
                 
                 )}
                 {index === 2 && (
@@ -239,7 +251,43 @@ useEffect(() => {
             </h3>
           </div>
         </div>
+
       </div>
+
+      <footer className={styles.footer_styledFooter}>
+  <div className={styles.footer_content}>
+    <div className={styles.footer_logo}>Apex Flick</div>
+
+    <div className={styles.footer_links}>
+      <a href="/about">About</a>
+      <a href="/terms and conditions">Terms</a>
+      <a href="/privacy policy">Privacy</a>
+      <a href="mailto:apexflick.com@gmail.com">Support</a>
+    </div>
+
+    <div className={styles.footer_socials}>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+       facebook
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+      instagram
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+       twitter
+      </a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+        tiktok
+      </a>
+    </div>
+
+    <div className={styles.footer_copy}>
+      © {new Date().getFullYear()} Apex Flick. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+     
+
     </div>
   );
 };

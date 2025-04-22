@@ -6,6 +6,9 @@ import HomePage from "./pages/homepage";
 import Leaderboard from "./pages/leaderboard";
 import Withdrawal from "./pages/withdrawal";
 import Task from "./pages/task";
+import AboutPage from "./pages/about";
+import PrivacyPolicy from "./pages/privacyPolicy";
+import TermsAndConditions from "./pages/tandc";
 function App() {
   return (
     <Router>
@@ -17,6 +20,9 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard/>} /> 
         <Route path="/withdraw" element={<Withdrawal/>}/>
         <Route path="/task" element={<Task/>}/>
+        <Route path="/about" element={<AboutPage/>}/>
+        <Route path="/privacy policy" element={<PrivacyPolicy/>}/>
+        <Route path="/terms and conditions" element={<TermsAndConditions/>}/>
         </Routes>
     </Router>
   );

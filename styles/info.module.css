@@ -1,0 +1,102 @@
+/* Scoped Styles for Terms and Conditions, About, and Privacy Rights Pages */
+
+/* Page Container */
+.pageContainer {
+  width: 80%;
+  margin: 60px auto;
+  padding: 0 20px;
+  line-height: 1.7;
+  color: #eeeeee;
+  background: rgba(255, 255, 255, 0.1);  /* Transparent white background */
+  backdrop-filter: blur(10px);  /* Blur the background */
+  border-radius: 12px;  /* Slightly rounder corners for a smoother look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  /* Soft shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.2);  /* Slight border to enhance the glass effect */
+}
+
+/* Heading 1 - Page Title */
+.termsPageContainer h1,
+.aboutPageContainer h1,
+.privacyRightsPageContainer h1 {
+    font-size: 32px;
+    margin-bottom: 24px;
+    color: #b8f7c4;
+    border-bottom: 2px solid #267e4c;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Heading 2 - Subheadings */
+.termsPageContainer h2,
+.aboutPageContainer h2,
+.privacyRightsPageContainer h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #96ecb3;
+    position: relative;
+}
+
+.termsPageContainer h2::before,
+.aboutPageContainer h2::before,
+.privacyRightsPageContainer h2::before {
+    content: '●';
+    color: #2dfc77;
+    margin-right: 8px;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/* Paragraph Text */
+.termsPageContainer p,
+.aboutPageContainer p,
+.privacyRightsPageContainer p {
+    font-size: 16px;
+    margin-bottom: 18px;
+    color: #d8fadd;
+    text-align: justify;
+    text-indent: 20px;
+}
+
+/* Unordered List */
+.termsPageContainer ul,
+.aboutPageContainer ul,
+.privacyRightsPageContainer ul {
+    padding-left: 40px;
+    margin-bottom: 18px;
+}
+
+/* List Items */
+.termsPageContainer li,
+.aboutPageContainer li,
+.privacyRightsPageContainer li {
+    margin-bottom: 8px;
+    color: #c3f7d6;
+}
+
+/* Responsive Media Query */
+@media screen and (max-width: 600px) {
+    .termsPageContainer .pageContainer,
+    .aboutPageContainer .pageContainer,
+    .privacyRightsPageContainer .pageContainer {
+        padding: 0 10px;
+    }
+
+    .termsPageContainer h1,
+    .aboutPageContainer h1,
+    .privacyRightsPageContainer h1 {
+        font-size: 26px;
+    }
+
+    .termsPageContainer h2,
+    .aboutPageContainer h2,
+    .privacyRightsPageContainer h2 {
+        font-size: 18px;
+    }
+
+    .termsPageContainer p,
+    .aboutPageContainer p,
+    .privacyRightsPageContainer p {
+        font-size: 15px;
+    }
+}

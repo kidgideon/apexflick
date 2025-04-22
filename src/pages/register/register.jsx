@@ -32,7 +32,10 @@ const Register = () => {
 
     return (
         <div className={styles.overlay}>
-            <div className={styles.logoArea}>
+
+      <div className={styles.glassPrism}>
+
+      <div className={styles.logoArea}>
                 <img src={Logo} alt="Logo" />
                 <h3>Create an account</h3>
             </div>
@@ -134,6 +137,9 @@ const Register = () => {
                 </div>
             </div>
 
+      </div>
+
+          
              {/* Modal with Framer Motion animation */}
              {modal.visible && (
                     <motion.div 

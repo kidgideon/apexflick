@@ -77,7 +77,7 @@ const Leaderboard = () => {
       </div>
 
       <div className={styles.descBlock}>
-        <img src={`${currentUserData.profilePicture}`} alt="" />
+        <img src={`${currentUserData?.profilePicture}`} alt="" />
        <p> you are currently at rank {currentUserRank}</p>
          <p>Note: Only users with more than 100 Apex Flick cards are eligible for the cash reward.
          </p>

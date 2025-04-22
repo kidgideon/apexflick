@@ -31,7 +31,8 @@ import mrApex from '../../../images/mrapex.png'
 
   return(
     <div className={styles.overlay}>
-  <div className={styles.logoArea}>
+        <div className={styles.glassPrism}>
+        <div className={styles.logoArea}>
                 <img src={Logo} alt="Logo" />
                 <h3>Welcome back signin</h3>
             </div>
@@ -123,7 +124,7 @@ import mrApex from '../../../images/mrapex.png'
                     <p>Don't have an account? <Link className={styles.linkText} to={'/register'}>signup</Link></p>
                 </div>
             </div>
-
+        </div>
               {/* Modal with Framer Motion animation */}
               {modal.visible && (
                     <motion.div 

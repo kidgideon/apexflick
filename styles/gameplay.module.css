@@ -210,3 +210,54 @@
   }
 }
 
+.menuModalOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100vw;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.menuModal {
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  height: 40%;
+  width: 210px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 16px;
+  border-radius: 12px;
+  transition: background 0.2s ease;
+  width: 80%;
+
+  background: rgba(255, 255, 255, 0.1); /* semi-transparent */
+  backdrop-filter: blur(12px);          /* blur effect */
+  -webkit-backdrop-filter: blur(12px);  /* for Safari */
+
+  border: 1px solid rgba(255, 255, 255, 0.2); /* soft border */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);  /* subtle depth */
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
+.menuItem svg {
+  width: 24px;
+  height: 24px;
+}
+

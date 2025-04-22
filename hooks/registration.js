@@ -67,7 +67,7 @@ const useRegister = () => {
         friends: [],
         invitedMe: null,
         payback: { status: 'pending', datePaid: null },
-        tasks: [],
+        tasks: [{id:1, text: "follow us on instagram", link: "", done: false, reward: 15}],
         notifications: [],
         withdrawal: {
           accountBalance: 0,

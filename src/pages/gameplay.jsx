@@ -1,18 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from '../../../config/config';
+import { auth, db } from '../../config/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 import { Howl } from 'howler';
-import useGameplay from '../../../hooks/gameplay';
-import styles from '../../../styles/gameplay.module.css';
-import cardBack from '../../../images/cardsback.png';
-import apexCardImg from '../../../images/apexcard.png';
-import notapex from '../../../images/notapex.png';
-import failSound from '../../../sounds/fail.mp3';
-import successSound from '../../../sounds/win.mp3';
-import flipSound from '../../../sounds/flip.mp3';
+import useGameplay from '../../hooks/gameplay';
+import styles from '../../styles/gameplay.module.css';
+import cardBack from '../../images/cardsback.png';
+import apexCardImg from '../../images/apexcard.png';
+import notapex from '../../images/notapex.png';
+import failSound from '../../sounds/fail.mp3';
+import successSound from '../../sounds/win.mp3';
+import flipSound from '../../sounds/flip.mp3';
 
 // Initialize sound effects
 const failSoundEffect = new Howl({
@@ -122,16 +122,18 @@ const GamePlay = () => {
     saveGameplaySession()
     if (place === 'leaderboard' ) {
    navigate('/leaderboard')
-    } else if (place === 'withdrawal') {
-      navigate('/withdrawal')
-    } else if (place === 'task') {
+    } else if (place === 'Withdrawal') {
+      navigate('/withdraw')
+    } else if (place === 'Tasks') {
       navigate('/task')
     } else if (place === 'invite') {
       navigate('/friends')
-    } else if (place === 'help') {
+    } else if (place === 'Help & Support') {
       navigate('/help and support')
     } else if (place === 'notification') {
       navigate('/notifications')
+    } else if (place === 'Logout') {
+      navigate('/logout')
     }
   }
 
@@ -194,6 +196,7 @@ useEffect(() => {
     >
       {['Withdrawal', 'Tasks', 'Help & Support', 'invite', 'Logout'].map((label, index) => (
         <motion.div
+          onClick={() => gothere(`${label}`)}
           key={label}
           className={styles.menuItem}
           initial={{ x: 100, opacity: 0 }}

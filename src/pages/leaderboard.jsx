@@ -1,9 +1,9 @@
-import styles from '../../../styles/leaderboard.module.css';
+import styles from '../../styles/leaderboard.module.css';
 import React from 'react';
-import gameCard from '../../../images/apexcard.png';
-import useLeaderboard from '../../../hooks/leaderboard';
+import gameCard from '../../images/apexcard.png';
+import useLeaderboard from '../../hooks/leaderboard';
 import { useNavigate } from 'react-router-dom'
-import crown from '../../../images/crown.png'
+import crown from '../../images/crown.png'
 const Leaderboard = () => {
   const { qualifiedUsers, currentUserData, currentUserRank } = useLeaderboard();
   const navigate = useNavigate();

@@ -3,7 +3,7 @@ import React from 'react';
 import gameCard from '../../../images/apexcard.png';
 import useLeaderboard from '../../../hooks/leaderboard';
 import { useNavigate } from 'react-router-dom'
-
+import crown from '../../../images/crown.png'
 const Leaderboard = () => {
   const { qualifiedUsers, currentUserData, currentUserRank } = useLeaderboard();
   const navigate = useNavigate();
@@ -42,12 +42,14 @@ const Leaderboard = () => {
             <div className={styles.cardCount}>
               <img className={styles.card} src={gameCard} alt="card" />
               {secondUser.apexCard}
+
             </div>
           </div>
         )}
 
         {leadUser && (
           <div className={styles.leadUser}>
+             <img className={styles.crownPic} src={crown} alt="" />
             <div className={styles.dp}>
               <img src={leadUser.profilePicture} alt="dp" />
             </div>
@@ -68,9 +70,17 @@ const Leaderboard = () => {
             <div className={styles.cardCount}>
               <img className={styles.card} src={gameCard} alt="card" />
               {thirdUser.apexCard}
+             
             </div>
           </div>
         )}
+      </div>
+
+      <div className={styles.descBlock}>
+        <img src={`${currentUserData.profilePicture}`} alt="" />
+       <p> you are currently at rank {currentUserRank}</p>
+         <p>Note: Only users with more than 100 Apex Flick cards are eligible for the cash reward.
+         </p>
       </div>
 
       {/* Main Leaderboard List */}
@@ -81,6 +91,7 @@ const Leaderboard = () => {
           <div className={styles.competitors}>
             {qualifiedUsers.map((user, index) => (
               <div className={styles.competitor} key={user.id}>
+                <h2>{user.rank}</h2>
                 <div className={styles.userDp}>
                   <img src={user.profilePicture} alt="dp" />
                 </div>

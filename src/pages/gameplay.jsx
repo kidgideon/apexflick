@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { auth, db } from '../../config/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
@@ -118,24 +119,32 @@ const GamePlay = () => {
     return card.isApex ? apexCardImg : notapex;
   };
 
-  const gothere = (place) => {
-    saveGameplaySession()
-    if (place === 'leaderboard' ) {
-   navigate('/leaderboard')
+  const gothere = async (place) => {
+    await saveGameplaySession();
+  
+    if (place === 'leaderboard') {
+      navigate('/leaderboard');
     } else if (place === 'Withdrawal') {
-      navigate('/withdraw')
+      navigate('/withdraw');
     } else if (place === 'Tasks') {
-      navigate('/task')
+      navigate('/task');
     } else if (place === 'invite') {
-      navigate('/friends')
+      navigate('/friends');
     } else if (place === 'Help & Support') {
-      navigate('/help and support')
+      window.location.href = 'mailto:apexflick.com@gmail.com';
     } else if (place === 'notification') {
-      navigate('/notifications')
+      navigate('/notifications');
     } else if (place === 'Logout') {
-      navigate('/logout')
+      try {
+        resetGame();            // 1. Reset game
+        localStorage.clear();   // 2. Clear local storage
+        await signOut(auth);    // 3. Firebase sign-out
+        navigate('/');          // 4. Redirect to homepage
+      } catch (err) {
+        console.error('Logout failed:', err);
+      }
     }
-  }
+  };
 
  
 useEffect(() => {

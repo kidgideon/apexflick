@@ -8,12 +8,11 @@
 }
 .navbar {
     position: fixed;
-    height: 30px;
+    height: 40px;
     top: 0px;
     left: 0px;
     right: 0px;
     width: 100%;
-    padding: 12px 20px;
     color: white;
     z-index: 1000;
     display: flex;
@@ -53,7 +52,6 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-
 }
 
 .title {
@@ -76,8 +74,8 @@
     color: white;
     font-size: 20px;
     margin-top: 70px;
-
 }
+
 .balancePoint {
     width: 100%;
     max-width: 350px;

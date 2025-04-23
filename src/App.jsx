@@ -9,6 +9,8 @@ import Task from "./pages/task";
 import AboutPage from "./pages/about";
 import PrivacyPolicy from "./pages/privacyPolicy";
 import TermsAndConditions from "./pages/tandc";
+import Friends from "./pages/friends";
+import SignupOnme from "./pages/signupOnMe";
 function App() {
   return (
     <Router>
@@ -23,6 +25,8 @@ function App() {
         <Route path="/about" element={<AboutPage/>}/>
         <Route path="/privacy policy" element={<PrivacyPolicy/>}/>
         <Route path="/terms and conditions" element={<TermsAndConditions/>}/>
+        <Route path="/friends" element={<Friends/>}/>
+        <Route path="/signup/onme/:userId" element={<SignupOnme/>}/>
         </Routes>
     </Router>
   );

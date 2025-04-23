@@ -28,7 +28,7 @@ const Leaderboard = () => {
           </svg>
         </div>
         <div className={styles.leaderboardTitle}>LeaderBoard</div>
-        <div className={styles.compArea}></div>
+        <div className={styles.compArea}> </div>
       </div>
 
       {/* Top 3 Winners Section */}

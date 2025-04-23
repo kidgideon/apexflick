@@ -1,0 +1,164 @@
+.friendsInterface {
+     width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.friendsInterface h1 {
+    margin-top: 20px;
+}
+.navBar {
+    position: fixed;
+    height: 40px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  
+    /* Glass effect core */
+    background: rgba(255, 255, 255, 0.08); /* transparent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  
+    /* Optional extras for flavor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+}
+
+.back {
+    height: 100%;
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front {
+    height: 100%;
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mid {
+     width: 90%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100%;
+}
+
+
+.userCard {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+}
+
+
+.card {
+     width: 300px;
+     height: 300px;
+     border-radius: 20px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     margin-top: 60px;
+     padding: 20px;
+  background: rgba(0, 60, 30, 0.35);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 0 0.5px rgba(255, 255, 255, 0.4),
+    0 8px 25px rgba(0, 100, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow:
+      0 12px 30px rgba(0, 255, 100, 0.4),
+      0 6px 15px rgba(0, 100, 50, 0.5),
+      inset 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.card img {
+    width: 100px;
+    border-radius: 100px;
+}
+
+.card button {
+    padding: 15px 20px;
+    width: 150px;
+    background-color: #00a86b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.friendsInvited {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 5px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.friend {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+    /* Smooth transition for hover */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.friend:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+
+.friendDp img{
+     width: 50px;
+     border-radius: 50px;
+}
+
+
+
+
+
+

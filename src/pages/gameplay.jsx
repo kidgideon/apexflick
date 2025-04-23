@@ -42,7 +42,7 @@ const GamePlay = () => {
     startGame,
     selectCard,
     resetGame,
-    saveGameplaySession
+    saveGameplaySession,
   } = useGameplay();
 
   const navigate = useNavigate();
@@ -75,6 +75,7 @@ const GamePlay = () => {
         } catch (err) {
           console.error('Failed to fetch user data:', err);
         }
+
       }
     });
 
@@ -86,7 +87,7 @@ const GamePlay = () => {
     setShakeCardId(null); // Reset shake state
     setGlowCardId(null); // Reset glow state
     setShowCombo(false); // Reset combo text
-    startGame();
+    startGame()
   };
 
   const handleSelectCard = (cardId) => {

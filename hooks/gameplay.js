@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../config/config';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const useGameplay = () => {
   const [cards, setCards] = useState([]);
@@ -9,77 +10,54 @@ const useGameplay = () => {
   const [lastPlayed, setLastPlayed] = useState(null);
   const [phase, setPhase] = useState('idle');
   const [selectedCardId, setSelectedCardId] = useState(null);
+
   const comboCountRef = useRef(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // 🔄 Load from Firestore on initial mount
+  // 👇 Async hydration after auth state changes
   useEffect(() => {
-    const fetchGameState = async () => {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      let localData = null;
-      let firestoreData = null;
-
-      // 1️⃣ Try get localStorage
-      const local = localStorage.getItem('gameState');
-      if (local) {
-        try {
-          localData = JSON.parse(local);
-        } catch (err) {
-          console.warn('Invalid localStorage data, ignoring.');
-        }
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        console.warn('User signed out, clearing game state.');
+        localStorage.removeItem('gameState');
+        return;
       }
 
-      // 2️⃣ Get Firestore gameplay
       try {
-        const userDoc = await getDoc(doc(db, 'users', user.uid));
-        if (userDoc.exists()) {
-          firestoreData = userDoc.data().gameplay || null;
-        }
+        const userRef = doc(db, 'users', user.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) return;
+
+        const gamePlay = userSnap.data()?.gameplay;
+
+        if (!gamePlay) return;
+
+        const existingState = JSON.parse(localStorage.getItem('gameState') || '{}');
+        const updatedState = {
+          ...existingState,
+          roundsPlayed: gamePlay.roundsPlayed,
+          apexCard: gamePlay.apexCard,
+          lastPlayed: gamePlay.lastPlayed,
+        };
+
+        localStorage.setItem('gameState', JSON.stringify(updatedState));
+
+        // 🧠 Hydrate states
+        setRoundsPlayed(updatedState.roundsPlayed || 0);
+        setApexCard(updatedState.apexCard || 0);
+        setLastPlayed(updatedState.lastPlayed || null);
+        setPhase(updatedState.phase || 'idle');
+        setSelectedCardId(updatedState.selectedCardId || null);
+        comboCountRef.current = updatedState.comboCount || 0;
       } catch (err) {
-        console.error('Failed to fetch from Firestore:', err);
+        console.error('Failed to load gameplay state:', err);
       }
+    });
 
-      // 3️⃣ Compare based on roundsPlayed (simpler than timestamp comparison)
-      const localRounds = localData?.roundsPlayed || 0;
-      const firestoreRounds = firestoreData?.roundsPlayed || 0;
-
-      // Choose the game state with the highest roundsPlayed
-      const useLocal = localRounds >= firestoreRounds;
-
-      const finalData = useLocal ? localData : {
-        cards: [],
-        roundsPlayed: firestoreRounds,
-        apexCard: firestoreData?.apexCard || 0,
-        lastPlayed: firestoreData?.lastPlayed || null,
-        phase: 'idle',
-        selectedCardId: null,
-        comboCount: 0,
-      };
-
-      // 4️⃣ Set state from chosen data
-      setRoundsPlayed(finalData.roundsPlayed || 0);
-      setApexCard(finalData.apexCard || 0);
-      setLastPlayed(finalData.lastPlayed || null);
-      setPhase(finalData.phase || 'idle');
-      setSelectedCardId(finalData.selectedCardId || null);
-      comboCountRef.current = finalData.comboCount || 0;
-      setCards(finalData.cards || []);
-
-      // 5️⃣ Save that back to localStorage (clean + synced)
-      localStorage.setItem('gameState', JSON.stringify(finalData));
-
-      setIsLoading(false);
-    };
-
-    fetchGameState();
+    return () => unsubscribe();
   }, []);
 
-  // 🔃 Persist to localStorage on state changes (after Firestore fetch)
   useEffect(() => {
-    if (isLoading) return;
-
     const gameState = {
       cards,
       roundsPlayed,
@@ -89,9 +67,8 @@ const useGameplay = () => {
       selectedCardId,
       comboCount: comboCountRef.current,
     };
-
     localStorage.setItem('gameState', JSON.stringify(gameState));
-  }, [cards, roundsPlayed, apexCard, lastPlayed, phase, selectedCardId, isLoading]);
+  }, [cards, roundsPlayed, apexCard, lastPlayed, phase, selectedCardId]);
 
   const saveGameplaySession = async () => {
     const user = auth.currentUser;
@@ -104,7 +81,7 @@ const useGameplay = () => {
         'gameplay.apexCard': apexCard,
         'gameplay.lastPlayed': Date.now(),
       });
-      console.log('Gameplay saved to Firestore');
+      console.log('Gameplay session saved to Firestore');
     } catch (err) {
       console.error('Error saving gameplay session:', err);
     }
@@ -137,7 +114,7 @@ const useGameplay = () => {
       comboCountRef.current += 1;
 
       if (comboCountRef.current === 2) {
-        console.log('Combo triggered! +1 Apex card bonus');
+        console.log('Combo triggered! Adding extra Apex card.');
         setApexCard((prev) => prev + 1);
         comboCountRef.current = 0;
       }
@@ -170,7 +147,6 @@ const useGameplay = () => {
     selectCard,
     resetGame,
     saveGameplaySession,
-    isLoading, // in case you want to show spinner while loading from Firestore
   };
 };
 

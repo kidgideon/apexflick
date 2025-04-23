@@ -4,10 +4,12 @@ import { auth, db } from '../config/config';
 import { onAuthStateChanged } from 'firebase/auth';
 
 const useGameplay = () => {
+  const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
+
   const [cards, setCards] = useState([]);
-  const [roundsPlayed, setRoundsPlayed] = useState(0);
-  const [apexCard, setApexCard] = useState(0);
-  const [lastPlayed, setLastPlayed] = useState(null);
+  const [roundsPlayed, setRoundsPlayed] = useState(localState.roundsPlayed || 0);
+  const [apexCard, setApexCard] = useState(localState.apexCard || 0);
+  const [lastPlayed, setLastPlayed] = useState(localState.lastPlayed || 0);
   const [phase, setPhase] = useState('idle');
   const [selectedCardId, setSelectedCardId] = useState(null);
 
@@ -21,41 +23,56 @@ const useGameplay = () => {
         localStorage.removeItem('gameState');
         return;
       }
-
+  
       try {
         const userRef = doc(db, 'users', user.uid);
         const userSnap = await getDoc(userRef);
-
+  
         if (!userSnap.exists()) return;
-
-        const gamePlay = userSnap.data()?.gameplay;
-
-        if (!gamePlay) return;
-
-        const existingState = JSON.parse(localStorage.getItem('gameState') || '{}');
-        const updatedState = {
-          ...existingState,
-          roundsPlayed: gamePlay.roundsPlayed,
-          apexCard: gamePlay.apexCard,
-          lastPlayed: gamePlay.lastPlayed,
+  
+        const firestoreGameplay = userSnap.data()?.gameplay || {};
+        const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
+  
+        console.log(localState)
+        // Compare and choose the highest values
+        const roundsPlayed = Math.max(firestoreGameplay.roundsPlayed || 0, localState.roundsPlayed || 0);
+        console.log(roundsPlayed)
+        const apexCard = Math.max(firestoreGameplay.apexCard || 0, localState.apexCard || 0);
+        console.log(apexCard)
+        const lastPlayed = Math.max(firestoreGameplay.lastPlayed || 0, localState.lastPlayed || 0);
+        console.log(lastPlayed)
+        const phase = localState.phase || 'idle';
+        const selectedCardId = localState.selectedCardId || null;
+        const comboCount = localState.comboCount || 0;
+  
+        const mergedState = {
+          roundsPlayed,
+          apexCard,
+          lastPlayed,
+          phase,
+          selectedCardId,
+          comboCount,
+          cards: localState.cards || [], // optional, default empty
         };
-
-        localStorage.setItem('gameState', JSON.stringify(updatedState));
-
-        // 🧠 Hydrate states
-        setRoundsPlayed(updatedState.roundsPlayed || 0);
-        setApexCard(updatedState.apexCard || 0);
-        setLastPlayed(updatedState.lastPlayed || null);
-        setPhase(updatedState.phase || 'idle');
-        setSelectedCardId(updatedState.selectedCardId || null);
-        comboCountRef.current = updatedState.comboCount || 0;
+  
+        // Store the merged state
+        localStorage.setItem('gameState', JSON.stringify(mergedState));
+  
+        // Hydrate React state
+        setRoundsPlayed(roundsPlayed);
+        setApexCard(apexCard);
+        setLastPlayed(lastPlayed);
+        setPhase(phase);
+        setSelectedCardId(selectedCardId);
+        comboCountRef.current = comboCount;
       } catch (err) {
-        console.error('Failed to load gameplay state:', err);
+        console.error('Failed to compare and load gameplay state:', err);
       }
     });
-
+  
     return () => unsubscribe();
   }, []);
+  
 
   useEffect(() => {
     const gameState = {

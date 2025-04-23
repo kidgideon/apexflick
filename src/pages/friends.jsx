@@ -13,7 +13,7 @@ const Friends = () => {
     const handleInvite = async () => {
         if (!currentUserData?.id) return;
 
-        const shareLink = `https://apexflick.com/signup/onme/${currentUserData.id}`;
+        const shareLink = `https://www.apexflick.com/signup/onme/${currentUserData.id}`;
         const shareData = {
             title: 'Join Me on Apex Flick!',
             text: 'Get 15 Apex cards when you join and play! 💸🔥',

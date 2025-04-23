@@ -15,23 +15,25 @@ import failSound from '../../sounds/fail.mp3';
 import successSound from '../../sounds/win.mp3';
 import flipSound from '../../sounds/flip.mp3';
 
-// Initialize sound effects
-const failSoundEffect = new Howl({
-  src: [failSound],
-  volume: 0.5,
-});
 
-const successSoundEffect = new Howl({
-  src: [successSound],
-  volume: 0.5,
-});
-
-const flipSoundEffect = new Howl({
-  src: [flipSound],
-  volume: 0.5,
-});
 
 const GamePlay = () => {
+  const failSoundEffect = useRef(null);
+  const successSoundEffect = useRef(null);
+  const flipSoundEffect = useRef(null);
+
+  useEffect(() => {
+    failSoundEffect.current = new Howl({ src: [failSound], volume: 0.5 });
+    successSoundEffect.current = new Howl({ src: [successSound], volume: 0.5 });
+    flipSoundEffect.current = new Howl({ src: [flipSound], volume: 0.5 });
+  
+    return () => {
+      // Optional: Unload sounds when component unmounts
+      failSoundEffect.current?.unload();
+      successSoundEffect.current?.unload();
+      flipSoundEffect.current?.unload();
+    };
+  }, []);
   const {
     cards,
     roundsPlayed,
@@ -83,7 +85,7 @@ const GamePlay = () => {
   }, [navigate]);
 
   const handleStartGame = () => {
-    flipSoundEffect.play(); // Play flip sound when the game starts
+    flipSoundEffect.current?.play(); // Play flip sound when the game starts
     setShakeCardId(null); // Reset shake state
     setGlowCardId(null); // Reset glow state
     setShowCombo(false); // Reset combo text
@@ -97,7 +99,7 @@ const GamePlay = () => {
       setGlow(true);
       setTimeout(() => setGlow(false), 1000); // Remove glow after 1 second
 
-      successSoundEffect.play(); // Play success sound for correct card
+      successSoundEffect.current?.play(); // Play success sound for correct card
       setGlowCardId(cardId); // Glow the correct card
 
       // Show combo text if comboCount reaches 2
@@ -106,7 +108,7 @@ const GamePlay = () => {
         setTimeout(() => setShowCombo(false), 2000); // Hide combo text after 2 seconds
       }
     } else {
-      failSoundEffect.play(); // Play fail sound for wrong card
+      failSoundEffect.current?.play(); // Play fail sound for wrong card
       setShakeCardId(cardId); // Shake the wrong card
       navigator.vibrate?.(500); // Vibrate the device for 200ms
       const apexCard = cards.find((card) => card.isApex);

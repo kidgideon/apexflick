@@ -11,6 +11,7 @@ import PrivacyPolicy from "./pages/privacyPolicy";
 import TermsAndConditions from "./pages/tandc";
 import Friends from "./pages/friends";
 import SignupOnme from "./pages/signupOnMe";
+import Notification from "./pages/notification";
 function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/terms and conditions" element={<TermsAndConditions/>}/>
         <Route path="/friends" element={<Friends/>}/>
         <Route path="/signup/onme/:userId" element={<SignupOnme/>}/>
+        <Route path="/notifications" element={<Notification/>}/>
         </Routes>
     </Router>
   );

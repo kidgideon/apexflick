@@ -1,0 +1,117 @@
+.notificationsInterface {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+.navBar {
+    position: fixed;
+    height: 40px;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    color: white;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    /* Glass effect core */
+    background: rgba(255, 255, 255, 0.08); /* transparent white */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Optional extras for flavor */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+}
+
+
+.back {
+    width: 5%;
+    display: flex;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.back svg {
+    width: 30px;
+}
+
+.end {
+    width: 5%;
+    display: flex;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.mid {
+    width: 90%;
+    display: flex;
+    height: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.notifications {
+ margin-top: 60px;
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ gap: 10px;
+}
+.notification {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 60px;
+    gap: 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+.firstPath {
+    width: 50%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* Hover effect */
+.notification:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.02);
+    box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+}
+
+
+.notification svg {
+    margin-left: 30px;
+}

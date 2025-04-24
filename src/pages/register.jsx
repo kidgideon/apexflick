@@ -20,9 +20,9 @@ const Register = () => {
         e.preventDefault();
         setIsLoading(true); // Start loading
         try {
-            console.log('Attempting to register user');
+          
             await registerUser(username, email, password);
-            console.log('Registration successful');
+          
         } catch (error) {
             console.error('Error during registration:', error);  // Log error
         } finally {

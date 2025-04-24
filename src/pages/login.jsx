@@ -19,9 +19,9 @@ import mrApex from '../../images/mrapex.png'
         e.preventDefault();
         setIsLoading(true); // Start loading
         try {
-            console.log('Attempting to register user');
+          
             await loginUser(email, password);
-            console.log('login successful');
+           
         } catch (error) {
             console.error('Error during Login:', error);  // Log error
         } finally {

@@ -23,9 +23,9 @@ const SignupOnme = () => {
         e.preventDefault();
         setIsLoading(true); // Start loading
         try {
-            console.log('Attempting to register user');
+         
             await registerUserOnMe(username, email, password, userId);
-            console.log('Registration successful');
+            
         } catch (error) {
             console.error('Error during registration:', error);  // Log error
         } finally {

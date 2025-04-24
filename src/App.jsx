@@ -12,6 +12,8 @@ import TermsAndConditions from "./pages/tandc";
 import Friends from "./pages/friends";
 import SignupOnme from "./pages/signupOnMe";
 import Notification from "./pages/notification";
+import Winners from "./pages/winners";
+import Admin from "./pages/Admin";
 function App() {
   return (
     <Router>
@@ -29,6 +31,8 @@ function App() {
         <Route path="/friends" element={<Friends/>}/>
         <Route path="/signup/onme/:userId" element={<SignupOnme/>}/>
         <Route path="/notifications" element={<Notification/>}/>
+        <Route path="/winners" element={<Winners/>}/>
+        <Route path="/Admin/pwd/0759/iamamoderator" element={<Admin/>}/>
         </Routes>
     </Router>
   );

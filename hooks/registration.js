@@ -40,14 +40,14 @@ const useRegister = () => {
         id: uuidv4(),
         link: "/friends",
         text: "Congrats! A friend just signed up.",
-        date: new Date().toISOString(),
+        date: Date.now(),
         read: false,
       };
   
       // Friend object with timestamp
       const newFriend = {
         userId,
-        dateAdded: new Date().toISOString(),
+        dateAdded: Date.now(),
       };
   
       await updateDoc(sentoRef, {
@@ -55,7 +55,7 @@ const useRegister = () => {
         notifications: arrayUnion(newNotification),
       });
   
-      console.log("Notification sent and friend added with timestamp.");
+   
     } catch (error) {
       console.error("Error in notify function:", error);
     }

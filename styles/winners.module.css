@@ -1,11 +1,12 @@
-.notificationsInterface {
+.winnersInterface {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    color: white;
+    padding-top: 80px;
 }
+
 .navBar {
     position: fixed;
     height: 40px;
@@ -60,66 +61,83 @@
     height: 100%;
     text-align: center;
     justify-content: center;
+    align-items: center;  
+}
+
+.winners {
+    width: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
-
-.notifications {
- margin-top: 60px;
- width: 100%;
- display: flex;
- justify-content: center;
- align-items: center;
- flex-direction: column;
- gap: 10px;
-}
-.notification {
+.dateNavigation {
     width: 80%;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    height: 60px;
-    gap: 20px;
-    border-radius: 20px;
+    color: white;
+    padding: 5px;
+  
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+  }
+  
+  .dateNavigation:hover {
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  }
+  
+.dateNavigation svg {
     cursor: pointer;
-    padding:5px;
+}
 
-    /* Glass effect */
+.winnerRolls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 30px;
+    color: white;
+}
+.winner {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    border-radius: 10px;
+  
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    color: #fff;
-}
+  }
 
-.firstPath {
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: row;
-    gap: 10px;
-}
-
-/* Hover effect */
-.notification:hover {
+  .winner:hover {
     background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.02);
-    box-shadow: 0 6px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+
+.winner img {
+    width: 60px;
+    border-radius: 60px;
 }
 
-.notification svg {
-    margin-left: 5px;
-}
-
-.date {
-    font-size: 80%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: end;
-    width: 20%;
+.winner h4 {
+    margin: 5px;
 }

@@ -33,7 +33,7 @@ const useTasks = () => {
 
         if (docSnap.exists()) {
           const userData = docSnap.data();
-          console.log("Fetched tasks:", userData.tasks);  // Add log here for debugging
+        
           setTasks(userData.tasks || []);  // Load tasks
         }
       } catch (err) {

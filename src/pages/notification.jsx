@@ -70,7 +70,7 @@ const Notification = () => {
               <h4>{notification.text || "No message"}</h4>
                  </div>
 
-              <p>
+              <p className={styles.date}>
                 {notification.date
                   ? new Date(notification.date).toLocaleString()
                   : "Unknown date"}

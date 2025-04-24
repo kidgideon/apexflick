@@ -13,6 +13,7 @@ const useGameplay = () => {
   const [lastPlayed, setLastPlayed] = useState(localState.lastPlayed || 0);
   const [phase, setPhase] = useState('idle');
   const [selectedCardId, setSelectedCardId] = useState(null);
+  const [companyLastReset, setCompanyLastReset] = useState(0); // Track the company's last reset timestamp
 
   const comboCountRef = useRef(0);
 
@@ -24,28 +25,28 @@ const useGameplay = () => {
         localStorage.removeItem('gameState');
         return;
       }
-  
+
       try {
         const userRef = doc(db, 'users', user.uid);
         const userSnap = await getDoc(userRef);
-  
+
         if (!userSnap.exists()) return;
-  
+
         const firestoreGameplay = userSnap.data()?.gameplay || {};
         const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
-  
-        console.log(localState)
+
+       
         // Compare and choose the highest values
         const roundsPlayed = Math.max(firestoreGameplay.roundsPlayed || 0, localState.roundsPlayed || 0);
-        console.log(roundsPlayed)
+      
         const apexCard = Math.max(firestoreGameplay.apexCard || 0, localState.apexCard || 0);
-        console.log(apexCard)
+      
         const lastPlayed = Math.max(firestoreGameplay.lastPlayed || 0, localState.lastPlayed || 0);
-        console.log(lastPlayed)
+       
         const phase = localState.phase || 'idle';
         const selectedCardId = localState.selectedCardId || null;
         const comboCount = localState.comboCount || 0;
-  
+
         const mergedState = {
           roundsPlayed,
           apexCard,
@@ -55,10 +56,10 @@ const useGameplay = () => {
           comboCount,
           cards: localState.cards || [], // optional, default empty
         };
-  
+
         // Store the merged state
         localStorage.setItem('gameState', JSON.stringify(mergedState));
-  
+
         // Hydrate React state
         setRoundsPlayed(roundsPlayed);
         setApexCard(apexCard);
@@ -66,18 +67,21 @@ const useGameplay = () => {
         setPhase(phase);
         setSelectedCardId(selectedCardId);
         comboCountRef.current = comboCount;
-         // Call handleInviteBonus if conditions are met
-         if (apexCard == 200) {
+
+        // Fetch the company's last reset date and compare it
+        await fetchCompanyResetDate();
+
+        // Call handleInviteBonus if conditions are met
+        if (apexCard == 200) {
           await handleInviteBonus(user.uid, apexCard);
         }
       } catch (err) {
         console.error('Failed to compare and load gameplay state:', err);
       }
     });
-  
+
     return () => unsubscribe();
   }, []);
-  
 
   useEffect(() => {
     const gameState = {
@@ -91,6 +95,68 @@ const useGameplay = () => {
     };
     localStorage.setItem('gameState', JSON.stringify(gameState));
   }, [cards, roundsPlayed, apexCard, lastPlayed, phase, selectedCardId]);
+
+  const fetchCompanyResetDate = async () => {
+  
+    try {
+      const companyRef = doc(db, 'company', 'hRXmonvi8q1ts5h6OqSs');
+      const companySnap = await getDoc(companyRef);
+  
+      if (companySnap.exists()) {
+        const lastGameReset = companySnap.data()?.lastGameReset;
+     
+  
+        if (lastGameReset && lastPlayed) {
+          if (lastGameReset > lastPlayed) {
+          
+  
+            // Reset the user's gameplay state in Firestore
+            await resetUserGameplayFirestore();
+  
+            // Also reset local game state
+            resetGame(); // Reset the game if company reset is more recent
+          } else {
+       
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Error fetching company reset date:', err);
+    }
+  };
+  
+  // Function to reset user's gameplay state in Firestore
+  const resetUserGameplayFirestore = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+  
+    try {
+      const userRef = doc(db, 'users', user.uid);
+      await updateDoc(userRef, {
+        'gameplay.roundsPlayed': 0,
+        'gameplay.apexCard': 0,
+        'gameplay.lastPlayed': null, // Optional: nullify or set to the reset time
+      });
+    
+    } catch (err) {
+      console.error('Error resetting user gameplay in Firestore:', err);
+    }
+  };
+  
+  
+
+  const resetGame = () => {
+    
+      setCards([]);
+      setRoundsPlayed(0);
+      setApexCard(0);
+      setLastPlayed(null);
+      setPhase('idle');
+      setSelectedCardId(null);
+      comboCountRef.current = 0;
+      localStorage.removeItem('gameState');
+    
+  };
 
   const handleInviteBonus = async (userId, apexCardValue) => {
     try {
@@ -136,20 +202,19 @@ const useGameplay = () => {
             read: false,
             text: 'Congratulations, you just won 15 apex flick for your invite',
             link: '/gameplay',
-            date: new Date().toISOString(),
+            date: Date.now(),
             id: uuidv4(), // Generate unique ID for the notification
           };
 
           const notificationsRef = inviterRef.collection('notifications');
           await notificationsRef.add(notification);
-          console.log('Inviter updated and notification sent');
+        
         }
       }
     } catch (err) {
       console.error('Error handling invite bonus:', err);
     }
   };
-
 
   const saveGameplaySession = async () => {
     const user = auth.currentUser;
@@ -162,7 +227,7 @@ const useGameplay = () => {
         'gameplay.apexCard': apexCard,
         'gameplay.lastPlayed': Date.now(),
       });
-      console.log('Gameplay session saved to Firestore');
+   
     } catch (err) {
       console.error('Error saving gameplay session:', err);
     }
@@ -176,7 +241,8 @@ const useGameplay = () => {
     }));
   };
 
-  const startGame = () => {
+  const startGame = async () => {
+    await fetchCompanyResetDate(); // Ensures the state is checked and reset if necessary
     setCards(generateCards());
     setPhase('play');
     setSelectedCardId(null);
@@ -195,7 +261,7 @@ const useGameplay = () => {
       comboCountRef.current += 1;
 
       if (comboCountRef.current === 2) {
-        console.log('Combo triggered! Adding extra Apex card.');
+     
         setApexCard((prev) => prev + 1);
         comboCountRef.current = 0;
       }
@@ -204,17 +270,6 @@ const useGameplay = () => {
     }
 
     setPhase('result');
-  };
-
-  const resetGame = () => {
-    setCards([]);
-    setRoundsPlayed(0);
-    setApexCard(0);
-    setLastPlayed(null);
-    setPhase('idle');
-    setSelectedCardId(null);
-    comboCountRef.current = 0;
-    localStorage.removeItem('gameState');
   };
 
   return {

@@ -1,0 +1,12 @@
+.company {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.company h1 {
+    text-align: center;
+}

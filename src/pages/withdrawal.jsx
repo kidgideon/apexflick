@@ -42,7 +42,7 @@ const Withdrawal = () => {
             {/* Balance Display */}
             <div className={styles.balanceArea}>
                 <div className={styles.balancePoint}>
-                    <span>₦</span>{wallet?.accountBalance ?? 0}
+                    <span>₦</span>{Number(wallet?.accountBalance ?? 0).toLocaleString()}
                 </div>
             </div>
 

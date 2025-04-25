@@ -250,7 +250,6 @@ const useGameplay = () => {
     setSelectedCardId(null);
     setLastPlayed(Date.now());
     setRoundsPlayed((prev) => prev + 1);
-
   };
 
   const selectCard = (cardId) => {

@@ -190,6 +190,11 @@
   .descBlock img:hover {
     transform: scale(1.05);
   }
+
+  .descBlock p {
+    width: 100%;
+    text-align: center;
+  }
   
   
 .dp img {

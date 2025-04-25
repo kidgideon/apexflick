@@ -1,4 +1,5 @@
 import styles from '../../styles/leaderboard.module.css';
+import { useEffect } from 'react';
 import React from 'react';
 import gameCard from '../../images/apexcard.png';
 import useLeaderboard from '../../hooks/leaderboard';
@@ -7,6 +8,7 @@ import crown from '../../images/crown.png'
 const Leaderboard = () => {
   const { qualifiedUsers, currentUserData, currentUserRank } = useLeaderboard();
   const navigate = useNavigate();
+
 
   const leadUser = qualifiedUsers[0];
   const secondUser = qualifiedUsers[1];

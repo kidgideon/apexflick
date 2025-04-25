@@ -83,6 +83,7 @@ const useGameplay = () => {
     return () => unsubscribe();
   }, []);
 
+   
   useEffect(() => {
     const gameState = {
       cards,
@@ -96,6 +97,7 @@ const useGameplay = () => {
     localStorage.setItem('gameState', JSON.stringify(gameState));
   }, [cards, roundsPlayed, apexCard, lastPlayed, phase, selectedCardId]);
 
+  
   const fetchCompanyResetDate = async () => {
   
     try {
@@ -248,6 +250,14 @@ const useGameplay = () => {
     setSelectedCardId(null);
     setLastPlayed(Date.now());
     setRoundsPlayed((prev) => prev + 1);
+
+    if (window.IA) {
+      console.log('window.IA:', window.IA);  // Should be available now
+      clearInterval(checkInterval);  // Stop checking once available
+      window.IA.show();  // Show the ad
+    } else {
+      console.log('window.IA is not available yet...');}
+
   };
 
   const selectCard = (cardId) => {

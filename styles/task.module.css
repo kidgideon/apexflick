@@ -92,6 +92,7 @@
                 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
     cursor: pointer;
+    font-size: 60%;
 }
 
 .task:hover {
@@ -117,7 +118,9 @@
 }
 
 .task button {
-    padding: 10px 20px;
+    width: 100px;
+    height: 30px;
+    margin: 2px;
     border: none;
     border-radius: 10px;
     background-color:rgb(25, 195, 125);

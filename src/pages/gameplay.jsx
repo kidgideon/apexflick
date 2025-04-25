@@ -15,8 +15,6 @@ import failSound from '../../sounds/fail.mp3';
 import successSound from '../../sounds/win.mp3';
 import flipSound from '../../sounds/flip.mp3';
 
-
-
 const GamePlay = () => {
   const failSoundEffect = useRef(null);
   const successSoundEffect = useRef(null);
@@ -164,7 +162,9 @@ useEffect(() => {
 
 
   return (
+    
     <div className={styles.gameplayArea}>
+       
       {/* === NAVIGATION BAR === */}
       <div className={styles.navBar}>
         <div className={styles.profilePic}>

@@ -345,6 +345,10 @@
     .cashSection h1 {
         font-size: 210%;
     }
+
+    .logo {
+      width: 60%;
+    }
 }
 
 

@@ -61,7 +61,7 @@ useEffect(() => {
       <div className={styles.navbar}>
         <div className={styles.logo}>
           <img src={Logo} alt="logo" />
-          <h2>Apex flick</h2>
+          <h3>Apex flick</h3>
         </div>
 
         {/* Hamburger Icon */}

@@ -9,6 +9,7 @@ const useGameplay = () => {
 
   const [cards, setCards] = useState([]);
   const [roundsPlayed, setRoundsPlayed] = useState(localState.roundsPlayed || 0);
+  const [userData, setUserData] = useState([]);
   const [apexCard, setApexCard] = useState(localState.apexCard || 0);
   const [lastPlayed, setLastPlayed] = useState(localState.lastPlayed || 0);
   const [phase, setPhase] = useState('idle');
@@ -31,7 +32,6 @@ const useGameplay = () => {
         const userSnap = await getDoc(userRef);
 
         if (!userSnap.exists()) return;
-
         const firestoreGameplay = userSnap.data()?.gameplay || {};
         const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
 

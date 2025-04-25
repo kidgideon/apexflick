@@ -105,7 +105,7 @@ const useRegister = () => {
         friends: [],
         invitedMe: null,
         payback: true,
-        tasks: [{id:1, text: "follow us on instagram", link: "", done: false, reward: 15}],
+        completedTasks: [],
         notifications: [],
         withdrawal: {
           accountBalance: 0,
@@ -162,7 +162,7 @@ const useRegister = () => {
         friends: [],
         invitedMe: null,
         payback: false,
-        tasks: [],
+        completedTasks: [],
         notifications: [],
         withdrawal: {
           accountBalance: 0,
@@ -225,7 +225,7 @@ const useRegister = () => {
         friends: [],
         invitedMe: userId,
         payback: false,
-        tasks: [{id:1, text: "follow us on instagram", link: "", done: false, reward: 15}],
+        completedTasks: [],
         notifications: [],
         withdrawal: {
           accountBalance: 0,
@@ -287,7 +287,7 @@ const useRegister = () => {
         friends: [],
         invitedMe: userId,
         payback: false,
-        tasks: [],
+        completedTasks: [],
         notifications: [],
         withdrawal: {
           accountBalance: 0,

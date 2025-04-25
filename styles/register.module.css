@@ -15,7 +15,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 30px;
 }
 
 .logoArea img {
@@ -25,6 +24,8 @@
    
 }
 .glassPrism {
+   width: 35%;
+   padding: 15px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
@@ -40,7 +41,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 5px;
 }
+
 
 .glassPrism:hover {
   box-shadow:
@@ -61,7 +64,6 @@
 
 .formArea button {
     width: 100%;
-    max-width: 340px;
     padding: 15px 0px;
     background-color: rgb(33,59,44);
     color: white;
@@ -98,9 +100,7 @@
 }
 
 .inputContainer {
-    
     width: 100%;
-    max-width: 340px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -113,7 +113,6 @@
   .passwordContainer {
     position: relative;
     width: 100%;
-    max-width: 340px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -194,7 +193,7 @@
   }
 
   .continuePrompt hr {
-    width: 30%;
+    width: 20%;
   }
 
   .continuePrompt p {
@@ -271,7 +270,6 @@
   
   .superP {
     width: 100%;
-    max-width: 340px;
     text-align: end;
     margin: 3px;
     margin-bottom: 20px;
@@ -288,3 +286,9 @@
   .mrapexdiv img {
     width: 150px;
   }
+
+ @media (max-width: 768px) {
+     .glassPrism {
+        width: 90%;
+     }
+ }

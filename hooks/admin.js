@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { db } from '../config/config'; // your firebase config
 import { doc, getDocs, writeBatch, arrayUnion, increment, Timestamp, collection } from 'firebase/firestore';
+import { v4 as uuidv4 } from 'uuid'; // For generating unique notification ID
 
 const useAdminGameReset = () => {
   const [loading, setLoading] = useState(false);
@@ -68,6 +69,7 @@ const useAdminGameReset = () => {
         date: Date.now(),
         link: "/winners",
         read: false,
+        id: uuidv4(), 
       };
 
       users.forEach(user => {
@@ -83,6 +85,7 @@ const useAdminGameReset = () => {
         date: Date.now(),
         link: "/winners",
         read: false,
+        id: uuidv4(), 
       };
 
       const winnerRef = doc(db, "users", topUser.id);

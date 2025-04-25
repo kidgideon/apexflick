@@ -127,7 +127,7 @@ const GamePlay = () => {
   
     if (place === 'leaderboard') {
       navigate('/leaderboard');
-    } else if (place === 'Withdrawal') {
+    } else if (place === 'Balance') {
       navigate('/withdraw');
     } else if (place === 'Tasks') {
       navigate('/task');
@@ -146,7 +146,9 @@ const GamePlay = () => {
       } catch (err) {
         console.error('Logout failed:', err);
       }
-    } 
+    }  else if (place === 'winners') {
+      navigate('/winners')
+    }
   };
 
  
@@ -206,7 +208,7 @@ useEffect(() => {
       exit={{ x: '100%' }}
       transition={{ type: 'spring', stiffness: 100 }}
     >
-      {['Withdrawal', 'Tasks', 'Help & Support', 'invite', 'Logout'].map((label, index) => (
+      {['Balance', 'Tasks', 'Help & Support', 'invite', 'winners' , 'Logout'].map((label, index) => (
         <motion.div
           onClick={() => gothere(`${label}`)}
           key={label}
@@ -248,6 +250,13 @@ useEffect(() => {
           {
             index === 4 && (
               //invite route
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+            </svg>
+             
+            )
+          }{
+            index === 5 && (
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
             </svg>

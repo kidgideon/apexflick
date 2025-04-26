@@ -251,7 +251,6 @@ useEffect(() => {
             </h3>
           </div>
         </div>
-
       </div>
 
       <footer className={styles.footer_styledFooter}>

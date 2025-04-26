@@ -109,7 +109,6 @@ const useRegister = () => {
         notifications: [],
         withdrawal: {
           accountBalance: 0,
-          pendingAmount: 0,
           history: [],
         },
       });
@@ -166,7 +165,6 @@ const useRegister = () => {
         notifications: [],
         withdrawal: {
           accountBalance: 0,
-          pendingAmount: 0,
           history: [],
         },
       });
@@ -229,10 +227,7 @@ const useRegister = () => {
         notifications: [],
         withdrawal: {
           accountBalance: 0,
-          pendingAmount: 0,
           history: [],
-          accountNumber: '',
-          bank: '',
         },
       });
 
@@ -291,10 +286,7 @@ const useRegister = () => {
         notifications: [],
         withdrawal: {
           accountBalance: 0,
-          pendingAmount: 0,
           history: [],
-          accountNumber: '',
-          bank: '',
         },
       });
 

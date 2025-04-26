@@ -151,6 +151,7 @@
 
   .descBlock {
     width: 50%;
+    min-width: 300px;
     padding: 20px;
     margin-top: 15px;
     display: flex;
@@ -228,7 +229,7 @@
     width: 30px;
 }
 .chartArea {
-    width: 100%;
+    width: 99%;
     height: 100%;
 
     border-top-right-radius: 30px;
@@ -266,6 +267,7 @@
 }
 .competitor {
     width: 90%;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -314,4 +316,28 @@
 
 .competitor h3{
     width: 70%;
+}
+.timer {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  color: white;
+  font-family: 'Orbitron', sans-serif; /* Digital font vibe */
+  font-size: 1.5rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  cursor: default;
+  font-size: 90%;
+}
+.timer h2 , .timer p {
+  margin: 5px;
+}
+/* Hover effect */
+.timer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88;
+  border: 1px solid #00ff88;
 }

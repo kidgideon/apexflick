@@ -1,13 +1,38 @@
 import styles from '../../styles/leaderboard.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import gameCard from '../../images/apexcard.png';
+import { differenceInSeconds, endOfToday } from 'date-fns';
 import useLeaderboard from '../../hooks/leaderboard';
 import { useNavigate } from 'react-router-dom'
 import crown from '../../images/crown.png'
 const Leaderboard = () => {
   const { qualifiedUsers, currentUserData, currentUserRank } = useLeaderboard();
   const navigate = useNavigate();
+  const [timeLeft, setTimeLeft] = useState(0);
+
+  useEffect(() => {
+    const updateTimer = () => {
+      const now = new Date();
+      const midnight = endOfToday(); // 12:00:00 AM
+      const diffInSeconds = differenceInSeconds(midnight, now);
+      setTimeLeft(diffInSeconds > 0 ? diffInSeconds : 0);
+    };
+
+    updateTimer(); // call once immediately
+
+    const interval = setInterval(updateTimer, 1000); // update every second
+
+    return () => clearInterval(interval); // clean up on unmount
+  }, []);
+
+  const formatTime = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    return `${hours}h ${minutes}m ${secs}s`;
+  };
 
 
   const leadUser = qualifiedUsers[0];
@@ -77,6 +102,12 @@ const Leaderboard = () => {
           </div>
         )}
       </div>
+
+      <div className={styles.timer}>
+      <p>Today's competition ends in:</p>
+      <h2>{formatTime(timeLeft)}</h2>
+    </div>
+
 
       <div className={styles.descBlock}>
         <img src={`${currentUserData?.profilePicture}`} alt="" />

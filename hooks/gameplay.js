@@ -15,6 +15,7 @@ const useGameplay = () => {
   const [phase, setPhase] = useState('idle');
   const [selectedCardId, setSelectedCardId] = useState(null);
   const [companyLastReset, setCompanyLastReset] = useState(0); // Track the company's last reset timestamp
+  const [isNotification, setIsNotification] = useState(false);
 
   const comboCountRef = useRef(0);
 
@@ -26,27 +27,31 @@ const useGameplay = () => {
         localStorage.removeItem('gameState');
         return;
       }
-
+  
       try {
         const userRef = doc(db, 'users', user.uid);
         const userSnap = await getDoc(userRef);
-
+  
         if (!userSnap.exists()) return;
-        const firestoreGameplay = userSnap.data()?.gameplay || {};
+  
+        const userData = userSnap.data();
+        const firestoreGameplay = userData?.gameplay || {};
         const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
-
-       
-        // Compare and choose the highest values
+  
+        // --- Check Notifications ---
+        const notifications = userData?.notifications || [];
+        const hasUnreadNotifications = notifications.some(notification => notification.read === false);
+        setIsNotification(hasUnreadNotifications);
+  
+        // --- Merge Gameplay State ---
         const roundsPlayed = Math.max(firestoreGameplay.roundsPlayed || 0, localState.roundsPlayed || 0);
-      
         const apexCard = Math.max(firestoreGameplay.apexCard || 0, localState.apexCard || 0);
-      
         const lastPlayed = Math.max(firestoreGameplay.lastPlayed || 0, localState.lastPlayed || 0);
-       
+  
         const phase = localState.phase || 'idle';
         const selectedCardId = localState.selectedCardId || null;
         const comboCount = localState.comboCount || 0;
-
+  
         const mergedState = {
           roundsPlayed,
           apexCard,
@@ -54,12 +59,12 @@ const useGameplay = () => {
           phase,
           selectedCardId,
           comboCount,
-          cards: localState.cards || [], // optional, default empty
+          cards: localState.cards || [],
         };
-
+  
         // Store the merged state
         localStorage.setItem('gameState', JSON.stringify(mergedState));
-
+  
         // Hydrate React state
         setRoundsPlayed(roundsPlayed);
         setApexCard(apexCard);
@@ -67,21 +72,22 @@ const useGameplay = () => {
         setPhase(phase);
         setSelectedCardId(selectedCardId);
         comboCountRef.current = comboCount;
-
-        // Fetch the company's last reset date and compare it
+  
+        // Fetch the company's last reset date
         await fetchCompanyResetDate();
-
+  
         // Call handleInviteBonus if conditions are met
-        if (apexCard == 200) {
+        if (apexCard === 200) {
           await handleInviteBonus(user.uid, apexCard);
         }
       } catch (err) {
         console.error('Failed to compare and load gameplay state:', err);
       }
     });
-
+  
     return () => unsubscribe();
   }, []);
+  
 
    
   useEffect(() => {
@@ -285,6 +291,7 @@ const useGameplay = () => {
     selectCard,
     resetGame,
     saveGameplaySession,
+    isNotification,
   };
 };
 

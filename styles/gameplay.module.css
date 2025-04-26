@@ -90,6 +90,12 @@
     height: 100%;
 }
 
+.apexRounds p {
+  margin: 0px;
+  width: 100%;
+  text-align: center;
+}
+
 .cardsPlayArea {
     width: 100%;
     display: flex;
@@ -109,11 +115,29 @@
     align-items: center;
  flex-direction: row;
 }
-
 .progressBar {
-    width: 30px;
-    background-color: white;
-    
+  width: 50px;
+  height: 20px; /* optional: height if vertical */
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  appearance: none; /* Remove default styling */
+}
+
+/* Webkit (Chrome, Edge, Safari) */
+.progressBar::-webkit-progress-bar {
+  background-color: white;
+  border-radius: 5px;
+}
+
+.progressBar::-webkit-progress-value {
+  background-color: #00ff88; /* green liquid */
+  border-radius: 5px;
+}
+
+/* Firefox */
+.progressBar::-moz-progress-bar {
+  background-color: #00ff88; /* green liquid */
 }
 
 /* Add glow effect for the Apex card */
@@ -255,9 +279,21 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-
 .menuItem svg {
   width: 24px;
   height: 24px;
 }
 
+.activeDot {
+   width: 15px;
+   height: 15px;
+   background-color: red;
+   border-radius: 15px;
+   position: absolute;
+   top: 0px;
+   right: -5px;
+}
+
+.notification {
+  position: relative;
+}

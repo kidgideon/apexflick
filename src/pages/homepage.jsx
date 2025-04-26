@@ -18,7 +18,7 @@ const HomePage = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setAnimationType((prev) => (prev === 'flip' ? 'bounce' : 'flip')); // Toggle animation type
-    }, 5000); // Switch every 5 seconds
+    }, 12000); // Switch every 5 seconds
 
     return () => clearInterval(interval); // Cleanup interval on unmount
   }, []);
@@ -191,61 +191,51 @@ useEffect(() => {
 
         <div className={styles.detailExplanation}>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" />
-            </svg>
-
+          <lord-icon
+  src="https://cdn.lordicon.com/kdduutaw.json"
+  trigger="loop"
+  delay={1200}
+  stroke="bold"
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
             <h3>
               create account
             </h3>
           </div>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path d="M11.25 5.337c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.036 1.007-1.875 2.25-1.875S15 2.34 15 3.375c0 .369-.128.713-.349 1.003-.215.283-.401.604-.401.959 0 .332.278.598.61.578 1.91-.114 3.79-.342 5.632-.676a.75.75 0 0 1 .878.645 49.17 49.17 0 0 1 .376 5.452.657.657 0 0 1-.66.664c-.354 0-.675-.186-.958-.401a1.647 1.647 0 0 0-1.003-.349c-1.035 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401.31 0 .557.262.534.571a48.774 48.774 0 0 1-.595 4.845.75.75 0 0 1-.61.61c-1.82.317-3.673.533-5.555.642a.58.58 0 0 1-.611-.581c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.035-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959a.641.641 0 0 1-.658.643 49.118 49.118 0 0 1-4.708-.36.75.75 0 0 1-.645-.878c.293-1.614.504-3.257.629-4.924A.53.53 0 0 0 5.337 15c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.036 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.369 0 .713.128 1.003.349.283.215.604.401.959.401a.656.656 0 0 0 .659-.663 47.703 47.703 0 0 0-.31-4.82.75.75 0 0 1 .83-.832c1.343.155 2.703.254 4.077.294a.64.64 0 0 0 .657-.642Z" />
-            </svg>
+          <lord-icon
+  src="https://cdn.lordicon.com/ncmnezgk.json"
+  trigger="loop"
+  delay={1200}
+  stroke="bold"
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
             <h3>
               pick card
             </h3>
           </div>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
-            </svg>
-
+          <lord-icon
+  src="https://cdn.lordicon.com/fcyboqbm.json"
+  trigger="loop"
+  delay={1200}
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
             <h3>
               climb chart
             </h3>
           </div>
           <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="size-6"
-            >
-              <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />
-              <path
-                fillRule="evenodd"
-                d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
-                clipRule="evenodd"
-              />
-            </svg>
-
+          <lord-icon
+  src="https://cdn.lordicon.com/ytklkgsc.json"
+  trigger="loop"
+  delay={1200}
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
             <h3>
               Withdraw earnings
             </h3>
@@ -253,8 +243,64 @@ useEffect(() => {
         </div>
       </div>
 
+      <div className={styles.aboutUs}>
+         <h2>About our game</h2>
+         <div>
+         <lord-icon
+  src="https://cdn.lordicon.com/vttzorhw.json"
+  trigger="loop"
+  delay={1200}
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
+ <div className={styles.textDiv}>
+ <h3>skill meets luck</h3>
+     <p>Apex Flick isn’t pure chance — it’s a battle of quick decision-making and instinct where the fastest, smartest players can dominate.</p>
+     </div>
+ </div>
+   
+
+     <div>
+     <lord-icon
+  src="https://cdn.lordicon.com/bsdkzyjd.json"
+  trigger="loop"
+  delay={1200}
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
+
+<div className={styles.textDiv}>
+<h3>Daily Top Winner</h3>
+    <p>
+    Every day is a new competition. Players fight for the top spot daily, keeping the community active, competitive, and hungry for that Apex crown.
+    </p>
+  </div>
+
+    
+    </div>
+
+     <div>
+     <lord-icon
+  src="https://cdn.lordicon.com/rpviwvwn.json"
+  trigger="loop"
+  delay={1200}
+  colors="primary:#005f4a,secondary:#00321f"
+  style={{ width: '120px', height: '120px' }}
+/>
+
+<div className={styles.textDiv}>
+<h3> Community Driven Rewards System</h3>
+      <p>Instead of pay-to-win, Apex Flick builds value through player activity and engagement, making every flip part of a growing economy where the top players are truly recognized.
+</p>
+  </div>
+     
+     </div>
+    </div>
+  
+
       <footer className={styles.footer_styledFooter}>
   <div className={styles.footer_content}>
+
     <div className={styles.footer_logo}>Apex Flick</div>
 
     <div className={styles.footer_links}>
@@ -265,17 +311,17 @@ useEffect(() => {
     </div>
 
     <div className={styles.footer_socials}>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.facebook.com/profile.php?id=61575510487305" target="_blank" rel="noopener noreferrer">
        facebook
       </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/apex.flick?igsh=ZzkxMXQzdjg1ZjM4" target="_blank" rel="noopener noreferrer">
       instagram
       </a>
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-       twitter
+      <a href="https://tiktok.com/@apexflick" target="_blank" rel="noopener noreferrer">
+       tiktok
       </a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-        tiktok
+      <a href="https://youtube.com/@apexflick?si=4R9STnZSp00eo8DC" target="_blank" rel="noopener noreferrer">
+        youtube
       </a>
     </div>
 
@@ -285,8 +331,9 @@ useEffect(() => {
   </div>
 </footer>
 
-     
-
+   
+   
+       
     </div>
   );
 };

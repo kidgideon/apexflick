@@ -349,6 +349,17 @@
     .logo {
       width: 60%;
     }
+
+    .aboutUs {
+      width: 100%;
+      min-width: 350px;
+      gap: 20px;
+      font-size: 90%;
+    }
+
+    .textDiv {
+      width: 90%;
+    }
 }
 
 
@@ -493,3 +504,30 @@
     color: #88aa99;
   }
  
+  .aboutUs {
+    margin-top: 20px;
+    color: white;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .aboutUs div {
+    width: 100%;
+    display: flex;
+    
+  }
+
+  .textDiv {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .aboutUs h3, .aboutUs p{
+    margin: 0px;
+  }

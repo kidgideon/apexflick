@@ -297,3 +297,65 @@
 .notification {
   position: relative;
 }
+
+.modalOver {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  height: 300px;
+  width: 250px;
+  border-radius: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+   
+  /* Glass effect core */
+  background: rgba(255, 255, 255, 0.08); /* transparent white */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  /* Optional extras for flavor */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.xBtn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
+.modalContent img {
+  width: 150px;
+  height: 150px;
+}
+
+.modalContent p {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}

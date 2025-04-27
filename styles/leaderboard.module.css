@@ -28,7 +28,7 @@
   /* Optional extras for flavor */
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 10px 10px;
+ 
 }
 
 .leaderboardTitle {
@@ -73,6 +73,7 @@
 .nextUser, .leadUser {
     width: 100px;
     display: flex;
+    padding: 5px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -82,7 +83,8 @@
     color: white;
     font-weight: bold;
     transition: all 0.3s ease;
-  
+   font-size: 80%;
+   word-break: break-all;
     /* Glass Effect */
     background: rgba(0, 60, 30, 0.35);
     backdrop-filter: blur(14px) saturate(160%);
@@ -93,6 +95,12 @@
       0 6px 20px rgba(0, 0, 0, 0.3);
      
   }
+
+  .nextUser p, .leadUser p {
+    width: 100%;
+    text-align: center;
+  }
+  
 
   
   /* Size difference maintained */
@@ -247,6 +255,7 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* Subtle shadow */
     border: 1px solid rgba(255, 255, 255, 0.1); /* Glass border */
     padding-bottom: 20px;
+    font-size: 90%;
   }
   
 

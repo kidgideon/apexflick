@@ -33,7 +33,7 @@ import mrApex from '../../images/mrapex.png'
     <div className={styles.overlay}>
         <div className={styles.glassPrism}>
         <div className={styles.logoArea}>
-                <img src={Logo} alt="Logo" />
+                 <Link to={"/"}><img src={Logo} alt="Logo" /></Link>
                 <h3>Welcome back signin</h3>
             </div>
 
@@ -106,7 +106,7 @@ import mrApex from '../../images/mrapex.png'
                         )}
                     </div>
      <p className={styles.superP}>
-     <Link className={styles.linkText} to={'/forget-password'}>Forgot password?</Link>
+     <Link className={styles.linkText} to={'/forgot password'}>Forgot password?</Link>
      </p>
                     <button type="submit" disabled={isLoading}>Sign in</button>
                 </form>

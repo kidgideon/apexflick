@@ -171,7 +171,7 @@ const useRegister = () => {
 
       showModal('Registration successful!');
       setTimeout(() => {
-        navigate('/login')
+        navigate('/gameplay')
        }, 3000)
     } catch (err) {
       console.error(err);
@@ -294,7 +294,7 @@ const useRegister = () => {
 
       showModal('Registration successful!');
    setTimeout(() => {
-    navigate('/login')
+    navigate('/gameplay')
    }, 3000)
     } catch (err) {
       console.error(err);

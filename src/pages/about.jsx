@@ -32,10 +32,9 @@ const AboutPage = () => {
         Apex Flick is 100% built for Nigerians. We understand the market, the hustle, and the hunger for new ways to earn. That’s why we’re betting on you.
       </p>
 
-      {/* Add bulk filler to make it very long */}
-      {Array.from({ length: 12 }).map((_, i) => (
-        <div key={i}>
-          <h2>Our Commitment #{i + 1}</h2>
+      
+        <div >
+          <h2>Our Commitment</h2>
           <p>
             We remain steadfastly committed to delivering a platform that prioritizes user satisfaction, platform stability, transparency in reward allocation, continuous optimization of gameplay mechanics, and round-the-clock integrity monitoring for fairness enforcement. This commitment is foundational to our operation.
           </p>
@@ -43,7 +42,7 @@ const AboutPage = () => {
             Our ongoing updates and iterations shall continue to reflect our devotion to providing a premium user experience, meaningful gameplay loops, and persistent value to our player base across diverse devices and internet environments.
           </p>
         </div>
-      ))}
+     
     </motion.div>
   );
 };

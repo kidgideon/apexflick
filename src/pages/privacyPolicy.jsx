@@ -37,10 +37,9 @@ const PrivacyPolicy = () => {
         We use encryption, tokenized authentication, and secure data practices to ensure your information is protected at all times.
       </p>
 
-      {/* Repeat security and rights in different phrasing */}
-      {Array.from({ length: 10 }).map((_, i) => (
-        <div key={i}>
-          <h2>Privacy Clause #{i + 1}</h2>
+     
+        <div>
+          <h2>Privacy Clause </h2>
           <p>
             Apex Flick reiterates that no personal data shall be shared with third parties for marketing purposes. All user data remains confidential unless required by law or upon the user’s explicit request.
           </p>
@@ -48,7 +47,7 @@ const PrivacyPolicy = () => {
             Data retention policies are reviewed regularly to ensure unnecessary information is purged, and active information is maintained under secure conditions only.
           </p>
         </div>
-      ))}
+   
     </motion.div>
   );
 };

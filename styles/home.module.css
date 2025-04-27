@@ -512,12 +512,29 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 20px;
   }
 
-  .aboutUs div {
-    width: 100%;
-    display: flex;
-    
+
+  .overPart {
+     /* Glass effect core */
+     background: rgba(255, 255, 255, 0.08); /* transparent white */
+     backdrop-filter: blur(12px);
+     -webkit-backdrop-filter: blur(12px);
+ 
+     /* Optional extras for flavor */
+     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+     border-radius: 10px;
+     cursor:  pointer;
+     transition: 0.5s;
+     width: 97%;
+     display: flex;
+     flex-direction: row;
+  }
+
+  .overPart:hover {
+   transform: scale(1.1);
   }
 
   .textDiv {
@@ -529,5 +546,5 @@
   }
 
   .aboutUs h3, .aboutUs p{
-    margin: 0px;
+    margin: 5px;
   }

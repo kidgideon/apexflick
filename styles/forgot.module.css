@@ -1,0 +1,140 @@
+/* Main container setup */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+   
+  }
+  
+  /* Card styling for the Forgot Password form */
+  .card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgb(1, 63, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    padding: 40px 0px;
+  }
+  
+  /* Heading */
+  h2 {
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  /* Input field styles */
+   .card input {
+    width: 85%;
+    max-width: 300px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    outline: none;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  
+  /* Placeholder text */
+ .card input::placeholder {
+    color: #eee;
+  }
+  
+  /* Focused state of input */
+  .card input:focus {
+    background: rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Button styles */
+  .button {
+    width: 80%;
+    padding: 10px;
+    max-width: 300px;
+    background-color:rgb(25, 195, 125);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.4s ease;
+  }
+  
+  /* Error message */
+  .error {
+    color: #ff4b5c;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  /* Modal overlay to darken background */
+  .modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInOverlay 0.5s ease forwards;
+  }
+  
+  /* Modal box styling */
+  .modal {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 50px 10px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    max-width: 300px;
+    width: 80%;
+    color: white;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+  }
+  
+  /* Keyframes for fade-in and float-up animations */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes fadeInOverlay {
+    0% {
+      background: rgba(0, 0, 0, 0);
+    }
+    100% {
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+  
+  .container svg {
+    position: fixed;
+    top: 10px;
+    color: white;
+    left: 10px;
+    font-weight: bold;
+  }

@@ -16,6 +16,7 @@ const useGameplay = () => {
   const [selectedCardId, setSelectedCardId] = useState(null);
   const [companyLastReset, setCompanyLastReset] = useState(0); // Track the company's last reset timestamp
   const [isNotification, setIsNotification] = useState(false);
+  const [userInfo, setUserInfo] = useState({});
 
   const comboCountRef = useRef(0);
 
@@ -42,6 +43,11 @@ const useGameplay = () => {
         const notifications = userData?.notifications || [];
         const hasUnreadNotifications = notifications.some(notification => notification.read === false);
         setIsNotification(hasUnreadNotifications);
+
+      const picture = userData?.profilePicture || "no image";
+      const name = userData?.username || "user";
+
+       setUserInfo({picture, name})
   
         // --- Merge Gameplay State ---
         const roundsPlayed = Math.max(firestoreGameplay.roundsPlayed || 0, localState.roundsPlayed || 0);
@@ -292,6 +298,7 @@ const useGameplay = () => {
     resetGame,
     saveGameplaySession,
     isNotification,
+    userInfo,
   };
 };
 

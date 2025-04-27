@@ -48,7 +48,7 @@ useEffect(() => {
          } else if (place === "How it works") {
           navigate('/about')
          } else if (place === "contact") {
-          navigate('/mailto:apexflick.com@gmail.com')
+          navigate('mailto:apexflick.com@gmail.com')
          } else if (place === "Login") {
           navigate('/login')
          } else if (place === "signup") {
@@ -84,7 +84,7 @@ useEffect(() => {
         <div className={styles.links}>
           <Link to={'/'} className={styles.moveEl}>Home</Link>
           <Link to={'/about'} className={styles.moveEl}>how it works</Link>
-          <Link to={'/mailto:apexflick.com@gmail.com'} className={styles.moveEl}>contact</Link>
+          <Link to={'mailto:apexflick.com@gmail.com'} className={styles.moveEl}>contact</Link>
           <Link to={'/login'} className={styles.moveEl}>login/signup</Link>
         </div>
       </div>
@@ -159,7 +159,7 @@ useEffect(() => {
           <h1>Win N10,000 Daily.</h1>
           <h1>Play. pick. Win.</h1>
           <h1>No Deposits</h1>
-          <h4>Nigerians most thrilling card-pick cash game</h4>
+          <h4>Nigerians most thrilling </h4>
           <button onClick={handleStartPlaying}>Start playing Now</button>
         </div>
         <div className={styles.cardArea}>
@@ -221,6 +221,7 @@ useEffect(() => {
   src="https://cdn.lordicon.com/fcyboqbm.json"
   trigger="loop"
   delay={1200}
+  stroke="bold"
   colors="primary:#005f4a,secondary:#00321f"
   style={{ width: '120px', height: '120px' }}
 />
@@ -233,6 +234,7 @@ useEffect(() => {
   src="https://cdn.lordicon.com/ytklkgsc.json"
   trigger="loop"
   delay={1200}
+  stroke="bold"
   colors="primary:#005f4a,secondary:#00321f"
   style={{ width: '120px', height: '120px' }}
 />
@@ -245,10 +247,11 @@ useEffect(() => {
 
       <div className={styles.aboutUs}>
          <h2>About our game</h2>
-         <div>
+         <div  className={styles.overPart}>
          <lord-icon
   src="https://cdn.lordicon.com/vttzorhw.json"
   trigger="loop"
+  stroke="bold"
   delay={1200}
   colors="primary:#005f4a,secondary:#00321f"
   style={{ width: '120px', height: '120px' }}
@@ -260,11 +263,12 @@ useEffect(() => {
  </div>
    
 
-     <div>
+     <div  className={styles.overPart}>
      <lord-icon
   src="https://cdn.lordicon.com/bsdkzyjd.json"
   trigger="loop"
   delay={1200}
+  stroke="bold"
   colors="primary:#005f4a,secondary:#00321f"
   style={{ width: '120px', height: '120px' }}
 />
@@ -272,18 +276,19 @@ useEffect(() => {
 <div className={styles.textDiv}>
 <h3>Daily Top Winner</h3>
     <p>
-    Every day is a new competition. Players fight for the top spot daily, keeping the community active, competitive, and hungry for that Apex crown.
+    Every day is a new competition. Players fight for the top spot daily, keeping the community active and competitive
     </p>
   </div>
 
     
     </div>
 
-     <div>
+     <div  className={styles.overPart}>
      <lord-icon
   src="https://cdn.lordicon.com/rpviwvwn.json"
   trigger="loop"
   delay={1200}
+  stroke="bold"
   colors="primary:#005f4a,secondary:#00321f"
   style={{ width: '120px', height: '120px' }}
 />
@@ -306,7 +311,7 @@ useEffect(() => {
     <div className={styles.footer_links}>
       <a href="/about">About</a>
       <a href="/terms and conditions">Terms</a>
-      <a href="/privacy policy">Privacy</a>
+      <a href="/privacy policy">Privacy Policy</a>
       <a href="mailto:apexflick.com@gmail.com">Support</a>
     </div>
 
@@ -332,8 +337,6 @@ useEffect(() => {
 </footer>
 
    
-   
-       
     </div>
   );
 };

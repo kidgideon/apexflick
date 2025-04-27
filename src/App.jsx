@@ -15,14 +15,14 @@ import SignupOnme from "./pages/signupOnMe";
 import Notification from "./pages/notification";
 import Winners from "./pages/winners";
 import Admin from "./pages/Admin";
+import Forgot from "./pages/forgotPwd";
 
 function App() {
- 
-
   return (
     <Router>
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot password" element={<Forgot/>} />
         <Route path="/Login" element={<Login />} />
         <Route path="/gameplay" element={<GamePlay />} />
         <Route path="/" element={<HomePage />} />

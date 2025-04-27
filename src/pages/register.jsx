@@ -36,7 +36,7 @@ const Register = () => {
       <div className={styles.glassPrism}>
 
       <div className={styles.logoArea}>
-                <img src={Logo} alt="Logo" />
+        <Link to={"/"}> <img src={Logo} alt="Logo" /></Link>
                 <h3>Create an account</h3>
             </div>
 

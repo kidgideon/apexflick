@@ -19,6 +19,7 @@ const GamePlay = () => {
   const failSoundEffect = useRef(null);
   const successSoundEffect = useRef(null);
   const flipSoundEffect = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     failSoundEffect.current = new Howl({ src: [failSound], volume: 0.5 });
@@ -32,6 +33,8 @@ const GamePlay = () => {
       flipSoundEffect.current?.unload();
     };
   }, []);
+
+    
   const {
     cards,
     roundsPlayed,
@@ -44,6 +47,7 @@ const GamePlay = () => {
     selectCard,
     resetGame,
     saveGameplaySession,
+    userInfo,
   } = useGameplay();
 
   const navigate = useNavigate();
@@ -162,13 +166,23 @@ useEffect(() => {
 }, []);
 
 
+ // Open Modal and update user info
+ const openModal = () => {
+  setIsModalOpen(true);
+};
+
+// Close the modal
+const closeModal = () => {
+  setIsModalOpen(false);
+};
+
   return (
     
     <div className={styles.gameplayArea}>
        
       {/* === NAVIGATION BAR === */}
       <div className={styles.navBar}>
-        <div className={styles.profilePic}>
+        <div onClick={openModal} className={styles.profilePic}>
           {profilePicUrl && <img src={profilePicUrl} alt="profile" />}
         </div>
 
@@ -367,6 +381,39 @@ useEffect(() => {
           )}
         </div>
       </div>
+
+      
+
+{isModalOpen && (
+  <motion.div
+    className={styles.modalOver}
+    initial={{ opacity: 0 }}         // Initial opacity (invisible)
+    animate={{ opacity: 1 }}         // Animate to visible
+    exit={{ opacity: 0 }}            // Exit animation (fade out)
+    transition={{ duration: 0.5 }}  // Duration of the animation
+    onClick={closeModal}
+  >
+    <motion.div
+      className={styles.modalContent}
+      initial={{ scale: 0.9 }}        // Initial scale (slightly smaller)
+      animate={{ scale: 1 }}          // Animate to normal size
+      exit={{ scale: 0.9 }}           // Exit scale (slightly smaller)
+      transition={{ duration: 0.5 }}  // Duration of the scale animation
+    >
+      <div  onClick={closeModal} className={styles.xBtn}>
+        x
+      </div>
+      <div>
+        <img 
+          src={userInfo.picture === "no image" ? "https://via.placeholder.com/150" : userInfo.picture} 
+          alt={userInfo.name} 
+        />
+        <p>{userInfo.name}</p>
+      </div>
+    </motion.div>
+  </motion.div>
+)}
+
     </div>
   );
 };

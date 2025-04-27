@@ -50,10 +50,9 @@ const TermsAndConditions = () => {
         Apex Flick shall not be liable for any damages arising out of or in connection with your use of the platform. This includes, but is not limited to, loss of data, loss of winnings, emotional stress, or disappointment from not winning.
       </p>
 
-      {/* Just repeat legalese and section numbers to exhaust the reader */}
-      {Array.from({ length: 10 }).map((_, i) => (
-        <div key={i}>
-          <h2>{8 + i}. Additional Provisions</h2>
+     
+        <div>
+          <h2> Additional Provisions</h2>
           <p>
             This section is a continuation of previously stated terms, and serves to reiterate that all interactions, usage, and experiences on Apex Flick are subject to platform control, moderation, and alteration.
             Any disputes must be resolved through internal arbitration mechanisms defined at a future date by the platform.
@@ -62,7 +61,7 @@ const TermsAndConditions = () => {
             The repetition of these clauses is intentional, and serves to strengthen the enforceability of the terms herein. Redundancy does not negate relevance.
           </p>
         </div>
-      ))}
+    
     </motion.div>
   );
 };

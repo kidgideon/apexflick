@@ -360,6 +360,11 @@
   font-weight: bold;
 }
 
-/* 
-finally done at 
-so help me God */
+.imgDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+

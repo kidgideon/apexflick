@@ -403,7 +403,7 @@ const closeModal = () => {
       <div  onClick={closeModal} className={styles.xBtn}>
         x
       </div>
-      <div>
+      <div className={styles.imgDiv}>
         <img 
           src={userInfo.picture === "no image" ? "https://via.placeholder.com/150" : userInfo.picture} 
           alt={userInfo.name} 

@@ -314,22 +314,20 @@ const closeModal = () => {
       {showCombo && <div className={styles.comboText}>+1 Combo!</div>}
 
       {/* === CARD DISPLAY === */}
-    {/* === CARD DISPLAY === */}
-<div className={styles.cardsPlayArea}>
+ {/* === CARD DISPLAY === */}
+ <div className={styles.cardsPlayArea}>
   <div className={styles.cardsPlacement}>
     {cards.map((card, index) => (
       <motion.div
         id={`card-${card.id}`} // Add an ID to track the card
-        className={`${styles.cardContainer} ${
-          glowCardId === card.id ? styles.blink : ''
-        } ${shakeCardId === card.id ? styles.shake : ''}`}
+        className={`${styles.theCard} ${glowCardId === card.id ? styles.light : ''} ${shakeCardId === card.id ? styles.shake : ''}`}
         key={card.id}
         initial={{ scale: 0, opacity: 0, y: -50 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{
           type: 'spring',
-          stiffness: 300,
-          damping: 20,
+          stiffness: 400, // Faster animation speed
+          damping: 15, // More snappy behavior
           delay: index * 0.1,
         }}
         onClick={() => {
@@ -339,10 +337,16 @@ const closeModal = () => {
         }}
       >
         {/* Card element with front and back */}
-        <div
-          className={`${styles.theCard} ${
-            selectedCardId === card.id ? styles.flipped : ''
-          }`}
+        <motion.div
+          className={styles.theCard}
+          style={{ width: '100%', height: '100%' }}
+          animate={{ rotateY: (phase === 'result' || selectedCardId === card.id) ? 180 : 0 }}
+          transition={{
+            type: 'spring',
+            stiffness: 100, // Faster flip
+            damping: 10, // Snappy flip
+            duration: 0.2, // Control speed of the flip animation
+          }}
         >
           <div className={styles.cardBack}>
             <img src={cardBack} alt="Card Back" />
@@ -350,13 +354,14 @@ const closeModal = () => {
           <div className={styles.cardFront}>
             <img src={getCardImage(card)} alt="Card Front" />
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     ))}
   </div>
 
+  {/* === Buttons Section === */}
   <div className={styles.buttons}>
-    {/* === PLAY & NEXT BUTTON === */}
+    {/* Play Button (Visible when phase is 'idle') */}
     {phase === 'idle' && (
       <motion.button
         initial={{ scale: 0, opacity: 0 }} // Start small and invisible
@@ -375,6 +380,7 @@ const closeModal = () => {
       </motion.button>
     )}
 
+    {/* Next Button (Visible when phase is 'result') */}
     {phase === 'result' && (
       <motion.button
         initial={{ scale: 0, opacity: 0 }} // Start small and invisible
@@ -386,7 +392,7 @@ const closeModal = () => {
           duration: 0.3, // Faster animation duration
         }}
         whileTap={{ scale: 0.95 }} // Slightly shrink on tap
-        onClick={handleStartGame} // Play sound and start next round
+        onClick={handleStartGame} // Start the next round
         className={styles.playBtn}
       >
         Next
@@ -394,6 +400,8 @@ const closeModal = () => {
     )}
   </div>
 </div>
+
+
 
 
       

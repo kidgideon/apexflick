@@ -314,73 +314,87 @@ const closeModal = () => {
       {showCombo && <div className={styles.comboText}>+1 Combo!</div>}
 
       {/* === CARD DISPLAY === */}
-      <div className={styles.cardsPlayArea}>
-        <div className={styles.cardsPlacement}>
-          {cards.map((card, index) => (
-            <motion.div
-              id={`card-${card.id}`} // Add an ID to track the card
-              className={`${styles.theCard} ${
-                glowCardId === card.id ? styles.glow : ''
-              } ${shakeCardId === card.id ? styles.shake : ''}`}
-              key={card.id}
-              initial={{ scale: 0, opacity: 0, y: -50 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 20,
-                delay: index * 0.1,
-              }}
-              onClick={() => {
-                if (phase === 'play') {
-                  handleSelectCard(card.id);
-                }
-              }}
-            >
-              <img src={getCardImage(card)} alt="card" />
-            </motion.div>
-          ))}
+    {/* === CARD DISPLAY === */}
+<div className={styles.cardsPlayArea}>
+  <div className={styles.cardsPlacement}>
+    {cards.map((card, index) => (
+      <motion.div
+        id={`card-${card.id}`} // Add an ID to track the card
+        className={`${styles.cardContainer} ${
+          glowCardId === card.id ? styles.blink : ''
+        } ${shakeCardId === card.id ? styles.shake : ''}`}
+        key={card.id}
+        initial={{ scale: 0, opacity: 0, y: -50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        transition={{
+          type: 'spring',
+          stiffness: 300,
+          damping: 20,
+          delay: index * 0.1,
+        }}
+        onClick={() => {
+          if (phase === 'play') {
+            handleSelectCard(card.id);
+          }
+        }}
+      >
+        {/* Card element with front and back */}
+        <div
+          className={`${styles.theCard} ${
+            selectedCardId === card.id ? styles.flipped : ''
+          }`}
+        >
+          <div className={styles.cardBack}>
+            <img src={cardBack} alt="Card Back" />
+          </div>
+          <div className={styles.cardFront}>
+            <img src={getCardImage(card)} alt="Card Front" />
+          </div>
         </div>
+      </motion.div>
+    ))}
+  </div>
 
-        <div className={styles.buttons}>
-          {/* === PLAY & NEXT BUTTON === */}
-          {phase === 'idle' && (
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }} // Start small and invisible
-              animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
-              transition={{
-                type: 'spring', // Use spring animation for bounce effect
-                stiffness: 400, // Faster bounce intensity
-                damping: 15, // Smooth bounce
-                duration: 0.3, // Faster animation duration
-              }}
-              whileTap={{ scale: 0.95 }} // Slightly shrink on tap
-              onClick={handleStartGame} // Play sound and start game
-              className={styles.playBtn}
-            >
-              Play
-            </motion.button>
-          )}
+  <div className={styles.buttons}>
+    {/* === PLAY & NEXT BUTTON === */}
+    {phase === 'idle' && (
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }} // Start small and invisible
+        animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
+        transition={{
+          type: 'spring', // Use spring animation for bounce effect
+          stiffness: 400, // Faster bounce intensity
+          damping: 15, // Smooth bounce
+          duration: 0.3, // Faster animation duration
+        }}
+        whileTap={{ scale: 0.95 }} // Slightly shrink on tap
+        onClick={handleStartGame} // Play sound and start game
+        className={styles.playBtn}
+      >
+        Play
+      </motion.button>
+    )}
 
-          {phase === 'result' && (
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }} // Start small and invisible
-              animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
-              transition={{
-                type: 'spring', // Use spring animation for bounce effect
-                stiffness: 400, // Faster bounce intensity
-                damping: 15, // Smooth bounce
-                duration: 0.3, // Faster animation duration
-              }}
-              whileTap={{ scale: 0.95 }} // Slightly shrink on tap
-              onClick={handleStartGame} // Play sound and start next round
-              className={styles.playBtn}
-            >
-              Next
-            </motion.button>
-          )}
-        </div>
-      </div>
+    {phase === 'result' && (
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }} // Start small and invisible
+        animate={{ scale: 1, opacity: 1 }} // Grow to full size and become visible
+        transition={{
+          type: 'spring', // Use spring animation for bounce effect
+          stiffness: 400, // Faster bounce intensity
+          damping: 15, // Smooth bounce
+          duration: 0.3, // Faster animation duration
+        }}
+        whileTap={{ scale: 0.95 }} // Slightly shrink on tap
+        onClick={handleStartGame} // Play sound and start next round
+        className={styles.playBtn}
+      >
+        Next
+      </motion.button>
+    )}
+  </div>
+</div>
+
 
       
 

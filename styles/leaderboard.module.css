@@ -37,7 +37,6 @@
     justify-content: center;
     align-items: center;
     color: white;
-   
 }
 
 .compArea {
@@ -45,7 +44,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-   
 }
 
 .svgArea {
@@ -325,6 +323,7 @@
 
 .competitor h3{
     width: 70%;
+    font-size: 70%;
 }
 .timer {
   width: 250px;

@@ -159,7 +159,7 @@ useEffect(() => {
           <h1>Win N10,000 Daily.</h1>
           <h1>Play. pick. Win.</h1>
           <h1>No Deposits</h1>
-          <h4>Nigerians most thrilling </h4>
+          <h4>Nigeria's first Digital economy</h4>
           <button onClick={handleStartPlaying}>Start playing Now</button>
         </div>
         <div className={styles.cardArea}>

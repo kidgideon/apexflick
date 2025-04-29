@@ -3,6 +3,8 @@ import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../config/config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { v4 as uuidv4 } from 'uuid'; // For generating unique notification ID
+import combo from "../sounds/combo.mp3"
+import { Howl } from 'howler';
 
 const useGameplay = () => {
   const localState = JSON.parse(localStorage.getItem('gameState') || '{}');
@@ -17,6 +19,8 @@ const useGameplay = () => {
   const [companyLastReset, setCompanyLastReset] = useState(0); // Track the company's last reset timestamp
   const [isNotification, setIsNotification] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [comboAnimation, setComboAnimation] = useState(null);
+ const  comboSound = new Howl({ src: [combo], volume: 5});
 
   const comboCountRef = useRef(0);
 
@@ -93,9 +97,15 @@ const useGameplay = () => {
   
     return () => unsubscribe();
   }, []);
-  
 
-   
+  useEffect(() => {
+    if (comboAnimation) {
+      const timeout = setTimeout(() => setComboAnimation(null), 2000);
+      return () => clearTimeout(timeout); // Clear if new combo comes in
+    }
+  }, [comboAnimation]);
+
+  
   useEffect(() => {
     const gameState = {
       cards,
@@ -249,10 +259,12 @@ const useGameplay = () => {
 
   const generateCards = () => {
     const apexIndex = Math.floor(Math.random() * 5);
+   
     return Array.from({ length: 5 }, (_, i) => ({
       id: i,
       isApex: i === apexIndex,
     }));
+   
   };
 
   const startGame = async () => {
@@ -273,14 +285,18 @@ const useGameplay = () => {
     if (picked?.isApex) {
       setApexCard((prev) => prev + 1);
       comboCountRef.current += 1;
-
-      if (comboCountRef.current === 2) {
+     
+      if (comboCountRef.current >= 2) {
      
         setApexCard((prev) => prev + 1);
-        comboCountRef.current = 0;
+        setApexCard((prev) => prev + comboCountRef.current);
+        // Trigger combo animation starting from combo 2
+        setComboAnimation(comboCountRef.current);
+        comboSound.play();
       }
     } else {
       comboCountRef.current = 0;
+      setComboAnimation(null); // End animation if combo breaks
     }
 
     setPhase('result');
@@ -299,6 +315,7 @@ const useGameplay = () => {
     saveGameplaySession,
     isNotification,
     userInfo,
+    comboAnimation
   };
 };
 

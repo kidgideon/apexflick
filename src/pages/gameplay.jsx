@@ -48,6 +48,7 @@ const GamePlay = () => {
     resetGame,
     saveGameplaySession,
     userInfo,
+    comboAnimation,
   } = useGameplay();
 
   const navigate = useNavigate();
@@ -285,6 +286,11 @@ const closeModal = () => {
   </div>
 )}
 
+{comboAnimation && comboAnimation >= 2 && (
+  <div className={styles.comboPopup}>
+   <p className={styles.comboText}> Combo x{comboAnimation}! 🔥</p>
+  </div>
+)}
 
       {/* === SCORE AREA === */}
       <div className={styles.gameCount}>
@@ -310,8 +316,7 @@ const closeModal = () => {
         </div>
       </div>
 
-      {/* === COMBO TEXT === */}
-      {showCombo && <div className={styles.comboText}>+1 Combo!</div>}
+     
 
       {/* === CARD DISPLAY === */}
  {/* === CARD DISPLAY === */}

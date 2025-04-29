@@ -72,10 +72,19 @@ const useAdminGameReset = () => {
         id: uuidv4(), 
       };
 
+       // Step 5: Send notification to all users
+       const notificationTwo = {
+        text: `${topUser.username} won todays 10,000 naira! 🏆`,
+        date: Date.now(),
+        link: "/winners",
+        read: false,
+        id: uuidv4(), 
+      };
+
       users.forEach(user => {
         const userRef = doc(db, "users", user.id);
         batch.update(userRef, {
-          notifications: arrayUnion(notification),
+          notifications: arrayUnion(notification, notificationTwo),
         });
       });
 
@@ -88,9 +97,18 @@ const useAdminGameReset = () => {
         id: uuidv4(), 
       };
 
+       // Step 6: Send special notification to winner
+       const winnerNotificationTwo = {
+        text: "congratulations you won 10,000 Naira 🏆",
+        date: Date.now(),
+        link: "/withdraw",
+        read: false,
+        id: uuidv4(), 
+      };
+
       const winnerRef = doc(db, "users", topUser.id);
       batch.update(winnerRef, {
-        notifications: arrayUnion(winnerNotification),
+        notifications: arrayUnion(winnerNotification, winnerNotificationTwo),
         "withdrawal.accountBalance": increment(dailyReward),
       });
 

@@ -143,8 +143,6 @@
   height: auto;
   z-index: 10;
 }
-
-  
   
   /* Hover glow */
   .nextUser:hover, .leadUser:hover {
@@ -217,7 +215,7 @@
     height: 60px;
     border-radius: 60px;
     background-color: gray;
-    margin-top: -50px; 
+    margin-top: -60px; 
 }
 
 .cardCount {
@@ -264,6 +262,7 @@
     align-items: center;
     flex-direction: column;
 }
+
 
 .competitors {
     width: 100%;

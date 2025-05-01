@@ -20,7 +20,7 @@ const useGameplay = () => {
   const [isNotification, setIsNotification] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   const [comboAnimation, setComboAnimation] = useState(null);
- const  comboSound = new Howl({ src: [combo], volume: 5});
+ const  comboSound = new Howl({ src: [combo], volume: 0.5});
 
   const comboCountRef = useRef(0);
 

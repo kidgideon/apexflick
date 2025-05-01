@@ -22,9 +22,9 @@ const GamePlay = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    failSoundEffect.current = new Howl({ src: [failSound], volume: 5});
-    successSoundEffect.current = new Howl({ src: [successSound], volume: 5});
-    flipSoundEffect.current = new Howl({ src: [flipSound], volume: 5});
+    failSoundEffect.current = new Howl({ src: [failSound], volume: 0.5});
+    successSoundEffect.current = new Howl({ src: [successSound], volume: 0.5});
+    flipSoundEffect.current = new Howl({ src: [flipSound], volume: 0.5});
   
     return () => {
       // Optional: Unload sounds when component unmounts

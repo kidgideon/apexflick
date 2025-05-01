@@ -155,13 +155,17 @@ useEffect(() => {
       )}
 
       <div className={styles.topArea}>
-        <div className={styles.cashSection}>
-          <h1>Win N10,000 Daily.</h1>
-          <h1>Play. pick. Win.</h1>
-          <h1>No Deposits</h1>
-          <h4>Nigeria's first Digital economy</h4>
-          <button onClick={handleStartPlaying}>Start playing Now</button>
-        </div>
+      <div className={styles.cashSection}>
+  <h1 style={{ textAlign: "center" }}>Win ₦10,000 Every Day</h1>
+  <h2 style={{ textAlign: "center" }}>
+    Collect the Most Apex Cards<br /> and Get Paid
+  </h2>
+  <h3 style={{ textAlign: "center" }}>No Deposits. No Risk. Just Luck.</h3>
+  <p style={{ textAlign: "center" }}><strong>For Nigerians Only.</strong> Join early — be first in the game.</p>
+
+  <button onClick={handleStartPlaying}>Play Now – It’s Free</button>
+</div>
+
         <div className={styles.cardArea}>
           <motion.div
             className={styles.card}

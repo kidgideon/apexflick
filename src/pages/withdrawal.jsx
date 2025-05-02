@@ -131,7 +131,7 @@ const Withdrawal = () => {
 </svg>
 
           <h3>Withdrawals Begin on sartuday, May 31st, 2025</h3>
-<p>Our withdrawal system officially launches on <strong>sartuday, May 31st, 2025</strong>. Until then, keep playing daily and grow your wallet. The more you earn now, the bigger your payout when it goes live!</p>
+<p>Our withdrawal system officially launches on <strong>saturday, May 31st, 2025</strong>. Until then, keep playing daily and grow your wallet. The more you earn now, the bigger your payout when it goes live!</p>
 
             <button onClick={() => setShowModal(false)}>OK</button>
         </motion.div>

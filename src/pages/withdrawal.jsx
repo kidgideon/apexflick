@@ -132,7 +132,7 @@ const Withdrawal = () => {
 
 
 <h3>Insufficient Funds</h3>
-<p><strong>Heads up:</strong> You need a minimum balance of ₦10 to access balance-related features like withdrawals or transfers. Keep playing daily to build up your wallet!</p>
+<p>You need a minimum balance of ₦10 to access balance-related features like withdrawals or transfers. Keep playing daily to build up your wallet!</p>
 
 <button onClick={() => setShowModal(false)}>OK</button>
         </motion.div>

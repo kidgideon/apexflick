@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Logo from '../../images/apexflick logo.jpg';
 import cardFront from '../../images/apexcard.png';
 import cardBack from '../../images/cardsback.png';
+import verified from "../../images/verified.png"
 import { motion } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 import {auth, db} from '../../config/config'
@@ -171,6 +172,8 @@ useEffect(() => {
   </div>
 
   <button onClick={handleStartPlaying}>Play Now – It’s Free</button>
+
+  <img className={styles.verifiedImg} src={verified} alt="" />
 </div>
 
 

@@ -158,23 +158,29 @@ useEffect(() => {
       <div className={styles.topArea}>
       <div className={styles.cashSection}>
   <div className={styles.glassBox}>
-    <h1 style={{ textAlign: "center" }}>Win ₦10,000 Every Day</h1>
+    <h1 style={{ textAlign: "center" }}>
+      Play. Compete. Win.
+    </h1>
   </div>
 
   <div className={styles.glassBox}>
-    <h3 style={{ textAlign: "center" }}>No Deposits. No Risk. Just Luck.</h3>
+    <h3 style={{ textAlign: "center" }}>
+      No deposits. No risk. Just pure luck.
+    </h3>
   </div>
 
   <div className={styles.glassBox}>
-    <p style={{ textAlign: "center" }}>
-      <strong>For Nigerians Only.</strong> Join early — be first in the game.
-    </p>
+    <h3 style={{ textAlign: "center" }}>
+      Only the top player with more than 100 Apex Flick cards will win today’s ₦10,000 prize.
+    </h3>
   </div>
 
   <button onClick={handleStartPlaying}>Play Now – It’s Free</button>
 
   <img className={styles.verifiedImg} src={verified} alt="" />
 </div>
+
+
 
 
         <div className={styles.cardArea}>

@@ -8,7 +8,7 @@ const useAdminGameReset = () => {
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
 
-  const dailyReward = 10000;  // Reward amount for the winner
+  const dailyReward = 30000;  // Reward amount for the winner
 
   const endGameplayForToday = async () => {
     setLoading(true);
@@ -74,7 +74,7 @@ const useAdminGameReset = () => {
 
        // Step 5: Send notification to all users
        const notificationTwo = {
-        text: `${topUser.username} won todays 10,000 naira! 🏆`,
+        text: `${topUser.username} won todays 30,000 naira! 🏆`,
         date: Date.now(),
         link: "/winners",
         read: false,
@@ -99,7 +99,7 @@ const useAdminGameReset = () => {
 
        // Step 6: Send special notification to winner
        const winnerNotificationTwo = {
-        text: "congratulations you won 10,000 Naira 🏆",
+        text: "congratulations you won 30,000 Naira 🏆",
         date: Date.now(),
         link: "/withdraw",
         read: false,

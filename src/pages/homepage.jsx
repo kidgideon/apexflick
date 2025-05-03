@@ -171,7 +171,7 @@ useEffect(() => {
 
   <div className={styles.glassBox}>
     <h3 style={{ textAlign: "center" }}>
-      Only the top player with more than 100 Apex Flick cards will win today’s ₦10,000 prize.
+      Only the top player with more than 100 Apex Flick cards will win today’s ₦30,000 prize.
     </h3>
   </div>
 
@@ -179,8 +179,6 @@ useEffect(() => {
 
   <img className={styles.verifiedImg} src={verified} alt="" />
 </div>
-
-
 
 
         <div className={styles.cardArea}>
@@ -356,8 +354,6 @@ useEffect(() => {
     </div>
   </div>
 </footer>
-
-   
     </div>
   );
 };

@@ -112,13 +112,13 @@ const Leaderboard = () => {
       <div className={styles.descBlock}>
         <img src={`${currentUserData?.profilePicture}`} alt="" />
        <p> you are currently at rank {currentUserRank}</p>
-       Only the top player with more than 100 Apex Flick cards will win the ₦10,000 prize in today’s competition.
+       Only the top player with more than 100 Apex Flick cards will win the ₦30,000 prize in today’s competition.
       </div>
 
       {/* Main Leaderboard List */}
       <div className={styles.chartArea}>
         <div className={styles.competitionPoint}>
-          <h1>₦10,000</h1>
+          <h1>₦30,000</h1>
 
           <div className={styles.competitors}>
             {qualifiedUsers.map((user, index) => (

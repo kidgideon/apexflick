@@ -15,6 +15,37 @@ const HomePage = () => {
   const navigate = useNavigate(); // Initialize navigation
    const menuRef = useRef();
 
+   useEffect(() => {
+    const addIpToFirestore = async () => {
+      try {
+        const ip = await fetch('https://api.ipify.org?format=json')
+          .then((res) => res.json())
+          .then((data) => data.ip); // Get the user's IP
+          
+        const companyDocRef = doc(db, 'company', 'zaIR6aFJHfYJJcU8QR6e'); // Reference to the specific document
+
+        // Fetch the current IP array from the Firestore document
+        const companyDoc = await getDoc(companyDocRef);
+        if (companyDoc.exists()) {
+          const ipArray = companyDoc.data().ip || []; // Get the existing IPs (if any)
+
+          // Check if the IP is already saved
+          if (!ipArray.includes(ip)) {
+            // Add the IP to the array if it's not already there
+            await updateDoc(companyDocRef, {
+              ip: [...ipArray, ip],
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error adding IP to Firestore:', error);
+      }
+    };
+
+    // Call the function when the component mounts
+    addIpToFirestore();
+  }, []);
+
   // Automatically switch between flip and bounce animations
   useEffect(() => {
     const interval = setInterval(() => {

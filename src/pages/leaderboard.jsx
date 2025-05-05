@@ -108,7 +108,6 @@ const Leaderboard = () => {
       <h2>{formatTime(timeLeft)}</h2>
     </div>
 
-
       <div className={styles.descBlock}>
         <img src={`${currentUserData?.profilePicture}`} alt="" />
        <p> you are currently at rank {currentUserRank}</p>

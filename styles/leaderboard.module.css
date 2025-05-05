@@ -238,7 +238,6 @@
 .chartArea {
     width: 99%;
     height: 100%;
-
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
     display: flex;

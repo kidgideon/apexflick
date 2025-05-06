@@ -1,6 +1,8 @@
 import styles from '../../styles/home.module.css';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom'; // Import 
+// useNavigate
+import { getDoc, updateDoc, doc } from 'firebase/firestore';
 import Logo from '../../images/apexflick logo.jpg';
 import cardFront from '../../images/apexcard.png';
 import cardBack from '../../images/cardsback.png';
@@ -21,6 +23,8 @@ const HomePage = () => {
         const ip = await fetch('https://api.ipify.org?format=json')
           .then((res) => res.json())
           .then((data) => data.ip); // Get the user's IP
+
+        
           
         const companyDocRef = doc(db, 'company', 'zaIR6aFJHfYJJcU8QR6e'); // Reference to the specific document
 
@@ -28,10 +32,11 @@ const HomePage = () => {
         const companyDoc = await getDoc(companyDocRef);
         if (companyDoc.exists()) {
           const ipArray = companyDoc.data().ip || []; // Get the existing IPs (if any)
-
+          console.log(ip)
           // Check if the IP is already saved
           if (!ipArray.includes(ip)) {
             // Add the IP to the array if it's not already there
+            console.log(ip)
             await updateDoc(companyDocRef, {
               ip: [...ipArray, ip],
             });

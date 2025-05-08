@@ -255,8 +255,6 @@
     padding-bottom: 20px;
     font-size: 90%;
   }
-  
-
 .competitionPoint {
     width: 100%;
     display: flex;
@@ -264,7 +262,6 @@
     align-items: center;
     flex-direction: column;
 }
-
 
 .competitors {
     width: 100%;

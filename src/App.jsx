@@ -16,6 +16,7 @@ import Notification from "./pages/notification";
 import Winners from "./pages/winners";
 import Admin from "./pages/Admin";
 import Forgot from "./pages/forgotPwd";
+import NaijaNews from "./pages/news";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/notifications" element={<Notification />} />
         <Route path="/winners" element={<Winners />} />
         <Route path="/Admin/pwd/0759/iamamoderator" element={<Admin />} />
+        <Route path="/news" element={<NaijaNews />} />
       </Routes>
     </Router>
   );

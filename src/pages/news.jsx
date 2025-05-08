@@ -1,14 +1,6 @@
 import React, { useEffect } from "react";
 
 const NaijaNews = () => {
-  useEffect(() => {
-    // Inject Adsterra script
-    const adsterraScript = document.createElement("script");
-    adsterraScript.src = "//www.highperformanceformat.com/daf9a8fc35d5605fec1098d2ff2597fb/invoke.js";
-    adsterraScript.async = true;
-    document.getElementById("adsterra-ad").appendChild(adsterraScript);
-
-  }, []);
 
   return (
     <div>
